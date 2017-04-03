@@ -1,7 +1,0 @@
-sudo @p pt tellraw french_man 
-[
-	{"text":"Ant Farm Start","color":"yellow","bold":"true","clickEvent":{"action":"run_command","value":"/setblock -221 20 35 redstone_block 0"}},
-	{"text":"\nAnt Farm Stop","clickEvent":{"action":"run_command","value":"/setblock -219 17 38 redstone_block 0"}},
-	{"text":"\nRegular Start","clickEvent":{"action":"run_command","value":"/setblock -216 12 30 redstone_block 0"}},
-	{"text":"\nRegular Stop","clickEvent":{"action":"run_command","value":"/setblock -213 9 32 redstone_block"}}
-]

@@ -1,0 +1,297 @@
+//#-p stonebrick 0 -print
+///	15 4 -17
+
+//<Defines
+DEFINE $s$ minecraft:
+DEFINE $ObjA$ scoreboard objectives add
+DEFINE $ObjR$ scoreboard objectives remove
+DEFINE $TeamA$ scoreboard teams add
+DEFINE $TeamO$ scoreboard teams option
+DEFINE $TeamR$ scoreboard teams remove
+DEFINE $Style$ 16 16 0
+DEFINE $SA$ x=#,y=#,z=#,dx=#,dy=#,dz=#
+DEFINE $TextStart$ {"text":"","extra":[{"text":"[","color":"gray"},{"text":"NAME","color":"COLOR","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"NAME","color":"COLOF"}}},{"text":"]","color":"gray"},{"text":": "},
+
+DEFINE Deactivate fill |0| stonebrick 0
+DEFINE Activate fill |0| redstone_block 0
+DEFINE ColorFillWool fill |0| wool |1|
+DEFINE ColorFillClay fill |0| stained_hardened_clay |1|
+DEFINE ColorFillGlass fill |0| stained_glass |1|
+DEFINE ColorFillWood fill |0| wood |1|
+DEFINE ScTG scoreboard players tag
+DEFINE ScOP scoreboard players operation
+DEFINE ScTE scoreboard players test
+DEFINE ScRS scoreboard players reset
+DEFINE RevST scoreboard players tag @a[|0|] remove |0|
+DEFINE SetblockTestfor setblock ~ ~ ~ repeating_command_block 13 replace {TrackOutput:0b,auto:1b}
+DEFINE NumberAdd |0| Number = |0|
+DEFINE NumberObjAdd Number dummy
+
+DEFINE $X$ 16
+DEFINE $Y$ 16
+DEFINE $Z$ 0
+
+DEFINE $Load1$ 16 11 0
+DEFINE $Load2$ 16 11 4
+DEFINE $Load3$ 16 11 8
+DEFINE $Load4$ 16 11 12
+DEFINE $Load5$ 16 11 16
+DEFINE $Load6$ 16 11 20
+DEFINE $Load7$ 16 11 24
+DEFINE $LoadAll$ 16 11 0 16 11 24
+
+DEFINE $Save1$ 16 14 0
+DEFINE $Save2$ 16 14 4
+DEFINE $Save3$ 16 14 8
+DEFINE $Save4$ 16 14 12
+DEFINE $Save5$ 16 14 16
+DEFINE $Save6$ 16 14 20
+DEFINE $Save7$ 16 14 24
+DEFINE $SaveAll$ 16 14 0 16 14 24
+
+DEFINE $LoadChest$ 18 4 -6
+DEFINE $FillAll$ 16 16 0 25 45 25
+DEFINE $SaveChest$ 18 4 -6 18 4 -5
+//>
+
+//<Comments
+FUNC Func_RandomComments
+	
+END
+//>
+
+//<To Do 
+FUNC Func_ToDoThings
+TDWorks TDTest TDFix
+Mandatory Unimplemented Changes:
+	-
+	
+General Unimplemented Changes:
+	-
+	
+Bugs:
+	-
+	
+Implemented Changes:
+	-
+	
+Bug fixes:
+	-
+	
+END
+//>
+
+
+
+//<General Scoreboard Start
+FUNC Func_GeneralScoreboardStart
+	USE $ObjA$
+		NumberObjAdd
+		CHid dummy Chest ID
+		CHis dummy Chest ID Save
+		CHst dummy Chest State
+		CHti dummy Chest Timer
+	UNUSE
+	
+///	CHst 0 = Transfer from storage
+///	CHst 1 = Transfer to storage
+END
+//>
+
+//<General Scoreboard Clock
+FUNC Func_GeneralScoreboardClock
+	@e[type=ArmorStand,CCStand,CHti>=1] CHti + 1
+	@e[type=ArmorStand,CCStand,CHti<=-1] CHti - 1
+	
+	testfor @e[type=ArmorStand,CCStand,CHti=5]
+	CONDITION
+		Activate(CBPChestCalcLoad2)
+		
+	testfor @e[type=ArmorStand,CCStand,CHti=-5]
+	CONDITION
+		Activate(CBPChestCalcSave2)
+	
+	testfor @e[type=ArmorStand,CCStand,CHti=-10]
+	CONDITION
+		Activate(CBPChestCalcSave3)
+END
+//>
+
+//<Chest Calc Load 1
+FUNC Func_ChestCalcLoad1
+	summon ArmorStand $X$ $Y$ $Z$ {Tags:["CCStand"],Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1}
+	@e[CCStand] CHti = 1
+	ScOP @e[CCStand] CHid = @p CHid
+	@e[CCStand] CHid - 1
+	
+	@e[CCStand,CHid>=0<=299] setblock $Load1$ redstone_block 0
+	@e[CCStand,CHid>=300<=599] setblock $Load2$ redstone_block 0
+	@e[CCStand,CHid>=600<=899] setblock $Load3$ redstone_block 0
+	@e[CCStand,CHid>=900<=1199] setblock $Load4$ redstone_block 0
+	@e[CCStand,CHid>=1200<=1400] setblock $Load5$ redstone_block 0
+	@e[CCStand,CHid>=1500<=1799] setblock $Load6$ redstone_block 0
+	@e[CCStand,CHid>=1800<=2099] setblock $Load7$ redstone_block 0
+	fill $LoadAll$ stonebrick 0 replace redstone_block 0
+	
+	LOOP 1 6 + 1
+		$s$tp @e[CCStand,CHid>=300] ~ ~ ~4
+		@e[CCStand,CHid>=300] CHid - 300
+	END
+	
+	LOOP 1 30 + 1
+		$s$tp @e[CCStand,CHid>=10] ~ ~1 ~
+		@e[CCStand,CHid>=10] CHid - 10
+	END
+	
+	LOOP 1 10 + 1
+		$s$tp @e[CCStand,CHid>=1] ~1 ~ ~
+		@e[CCStand,CHid>=1] CHid - 1
+	END
+END
+//>
+
+//<Chest Calc Load 2
+FUNC Func_ChestCalcLoad2
+	@e[CCStand,CHti>=0] clone ~ ~ ~ ~ ~ ~1 $LoadChest$
+	fill $FillAll$ stone 2 replace chest
+	fill $FillAll$ stone 4 replace trapped_chest
+	ScRS @e[CCStand]
+	$s$kill @e[CCStand]
+	Deactivate(CBPGeneralScoreboardClock)
+END
+//>
+
+//<Chest Calc Save 1
+FUNC Func_ChestCalcSave1
+	summon ArmorStand $X$ $Y$ $Z$ {Tags:["CCStand"],Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1}
+	@e[CCStand] CHti = -1
+	ScOP @e[CCStand] CHid = @p CHid
+	ScOP @e[CCStand] CHis = @p CHid
+	@e[CCStand] CHid - 1
+	
+	@e[CCStand,CHid>=0<=299] setblock $Load1$ redstone_block 0
+	@e[CCStand,CHid>=300<=599] setblock $Load2$ redstone_block 0
+	@e[CCStand,CHid>=600<=899] setblock $Load3$ redstone_block 0
+	@e[CCStand,CHid>=900<=1199] setblock $Load4$ redstone_block 0
+	@e[CCStand,CHid>=1200<=1400] setblock $Load5$ redstone_block 0
+	@e[CCStand,CHid>=1500<=1799] setblock $Load6$ redstone_block 0
+	@e[CCStand,CHid>=1800<=2099] setblock $Load7$ redstone_block 0
+	fill $LoadAll$ stonebrick 0 replace redstone_block 0
+	
+	LOOP 1 6 + 1
+		$s$tp @e[CCStand,CHid>=300] ~ ~ ~4
+		@e[CCStand,CHid>=300] CHid - 300
+	END
+	
+	LOOP 1 30 + 1
+		$s$tp @e[CCStand,CHid>=10] ~ ~1 ~
+		@e[CCStand,CHid>=10] CHid - 10
+	END
+	
+	LOOP 1 10 + 1
+		$s$tp @e[CCStand,CHid>=1] ~1 ~ ~
+		@e[CCStand,CHid>=1] CHid - 1
+	END
+END
+//>
+
+//<Chest Calc Save 2
+FUNC Func_ChestCalcSave2
+	@e[CCStand,CHti<=0] clone $SaveChest$ ~ ~ ~
+	fill $SaveChest$ air 0
+	@e[CCStand,CHis>=0<=299] setblock $Save1$ redstone_block 0
+	@e[CCStand,CHis>=300<=599] setblock $Save2$ redstone_block 0
+	@e[CCStand,CHis>=600<=899] setblock $Save3$ redstone_block 0
+	@e[CCStand,CHis>=900<=1199] setblock $Save4$ redstone_block 0
+	@e[CCStand,CHis>=1200<=1400] setblock $Save5$ redstone_block 0
+	@e[CCStand,CHis>=1500<=1799] setblock $Save6$ redstone_block 0
+	@e[CCStand,CHis>=1800<=2099] setblock $Save7$ redstone_block 0
+	fill $SaveAll$ stonebrick 0 replace redstone_block 0
+END
+//>
+
+//<Chest Calc Save 3
+FUNC Func_ChestCalcSave3
+	fill $FillAll$ stone 2 replace chest
+	fill $FillAll$ stone 4 replace trapped_chest
+	ScRS @e[CCStand]
+	$s$kill @e[CCStand]
+	Deactivate(CBPGeneralScoreboardClock)
+END
+//>
+
+
+//<General Scoreboard End
+FUNC Func_GeneralScoreboardEnd
+	USE $ObjR$
+		CHid
+		CHclc
+		CHti
+	UNUSE
+	
+END
+//>
+
+
+
+//<Groups
+:CBPMainStart PULSE $Style$
+Deactivate(CBPMainStart)
+Func_GeneralScoreboardStart
+
+:CBPGeneralScoreboardClock CLOCK $Style$
+Func_GeneralScoreboardClock
+
+:CBPMainEnd PULSE $Style$
+Deactivate(CBPMainEnd)
+Func_GeneralScoreboardEnd
+
+
+
+:CBPChestCalcLoad1 PULSE $Style$
+Deactivate(CBPChestCalcLoad1)
+Func_ChestCalcLoad1
+Activate(CBPGeneralScoreboardClock)
+
+:CBPChestCalcLoad2 PULSE $Style$
+Deactivate(CBPChestCalcLoad2)
+Func_ChestCalcLoad2
+
+
+
+:CBPChestCalcSave1 PULSE $Style$
+Deactivate(CBPChestCalcSave1)
+Func_ChestCalcSave1
+Activate(CBPGeneralScoreboardClock)
+
+:CBPChestCalcSave2 PULSE $Style$
+Deactivate(CBPChestCalcSave2)
+Func_ChestCalcSave2
+
+:CBPChestCalcSave3 PULSE $Style$
+Deactivate(CBPChestCalcSave3)
+Func_ChestCalcSave3
+
+
+
+
+//>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

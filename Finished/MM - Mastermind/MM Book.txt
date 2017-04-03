@@ -1,0 +1,62 @@
+minecraft:give @p[score_EC=0,score_EC_min=0,r=10] written_book 1 0 
+	{pages:[0:
+		"[\"\",
+			{\"text\":\"General Settings\n\",\"bold\":true},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"MM: \",\"color\":\"dark_gray\"},
+			{\"text\":\"Start\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 64 16 80 redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Adds scoreboards\",\"color\":\"green\"}}
+			},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"End\n\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 90 16 80 redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Opens doors, clears all, removes scoreboards\",\"color\":\"red\"}}
+			},
+			
+			{\"text\":\"Doors: \",\"color\":\"dark_gray\"},
+			{\"text\":\"Open\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 74 22 80 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"Closed\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 68 22 90 redstone_block 0\"}},
+			
+			{\"text\":\"Gives wool: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 90 20 80 redstone_block 0\"}},
+			
+			{\"text\":\"Set buttons: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 70 22 89 redstone_block 0\"}},
+			
+			{\"text\":\"Clear inventory: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 72 22 80 redstone_block 0\"}},
+			
+			{\"text\":\"Clear lanes: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 74 22 85 redstone_block 0\"}},
+			
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Set answer: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 66 22 80 redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Press only if you customly changed the answer\",\"color\":\"gold\"}}
+			},
+			
+			{\"text\":\"Randomizer: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 64 22 80 redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Randomizes the answer (auto sets answer if pressed)\",\"color\":\"gold\"}}
+			},
+			
+			{\"text\":\"Bcast answer: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 68 22 80 redstone_block 0\"}},
+			
+			{\"text\":\"Clones answer: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 72 22 88 redstone_block 0\"}},
+			
+			{\"text\":\"Does both: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 76 22 80 redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Bcasts and clones answer\",\"color\":\"gold\"}}
+			}
+		]"
+	],
+title:MM Custom Set,author:french_man}

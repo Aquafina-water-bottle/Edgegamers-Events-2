@@ -1,0 +1,118 @@
+minecraft:give @p[score_EC=0,score_EC_min=0,r=7] written_book 1 0 
+	{pages:[0:
+		"[\"\",
+			{\"text\":\"General Settings\",\"bold\":true},
+			{\"text\":\"\n\n\"},
+			{\"text\":\"Select Arena: \",\"color\":\"dark_gray\"},
+			{\"text\":\"1\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Arena BWSave 1\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"2\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Arena BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"3\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Arena BWSave 3\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Pickaxe: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Pickaxe BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Pickaxe BWSave 0\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Ench\",\"color\":\"dark_aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Pickaxe BWSave 4\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Shovel: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Shovel BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Shovel BWSave 0\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Ench\",\"color\":\"dark_aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Shovel BWSave 4\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Axe: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Axe BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Axe BWSave 0\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Ench\",\"color\":\"dark_aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Axe BWSave 4\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Shears: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Shears BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Shears BWSave 0\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Ench\",\"color\":\"dark_aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Shears BWSave 4\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Potion: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set SpeedPotion BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set SpeedPotion BWSave 0\"}},
+			{\"text\":\"\n\n\"},
+			
+			{\"text\":\"Doors: \",\"color\":\"dark_gray\"},
+			{\"text\":\"Open\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 1120 47 -1628 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"Closed\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 1120 46 -1630 redstone_block 0\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Arena: \",\"color\":\"dark_gray\"},
+			{\"text\":\"Start\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 1120 41 -1630 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"Stop\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 1120 44 -1628 redstone_block 0\"}},
+			{\"text\":\"\n\n\"},
+			
+			{\"text\":\"Teleport\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/minecraft:tp @p 1195 27 -1596 180 0\"}},
+			{\"text\":\" to edit\",\"color\":\"dark_gray\"},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Teleport\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/minecraft:tp @p 1129 32 -1630 0 0\"}},
+			{\"text\":\" back\",\"color\":\"dark_gray\"},
+			{\"text\":\"\n\"}
+		]",1:
+		"[\"\",
+			{\"text\":\"Other Settings\",\"bold\":true},
+			{\"text\":\"\n\n\"},
+			
+			{\"text\":\"PVP: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set PVP BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set PVP BWSave 0\"}},
+			{\"text\":\"\n\"},
+			\",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"
+			{\"text\":\"Hunger: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Hunger BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Hunger BWSave 0\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Snowballs: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Snowball BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Snowball BWSave 0\"}},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Invulnerability: dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Invulnerability BWSave 2\"}},
+			{\"text\":\"-\",\"color\":\"gray\"},
+			{\"text\":\"Off\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Invulnerability BWSave 0\"}},
+			{\"text\":\"\n\n\"},
+			
+			{\"text\":\"Teleport to Arena:\",\"color\":\"dark_gray\"},
+			{\"text\":\"\n\"},
+			{\"text\":\"1\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/minecraft:tp @p 1107.0 24 -1617\"}},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"2\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/minecraft:tp @p 1152.0 24 -1616\"}},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"3\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/minecraft:tp @p 1129 24 -1596\"}}
+		]",2:
+		"[\"\",
+			{\"text\":\"Resetting things\",\"bold\":true},
+			{\"text\":\"\n\n\"},
+			{\"text\":\"Reset all settings\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/say doesn't work yet\"}},
+			{\"text\":\"\n\"},
+			{\"text\":\"Reset edited layers\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock 1195 29 -1593 redstone_block 0\"}}
+		]"
+	],
+title:Breakaway Custom Set,author:french_man}
+
+

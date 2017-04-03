@@ -1,0 +1,92 @@
+:CBPMainStart PULSE 10 10 0		[0 0 0 | 12 5 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	scoreboard objectives add IceRace dummy Ice Race
+	scoreboard objectives add IceRaceCD dummy Ice Race Countdown
+	scoreboard objectives add IceRaceBC dummy Ice Race Broadcast
+	scoreboard objectives setdisplay sidebar IceRace
+	scoreboard teams add IceR
+	scoreboard teams option IceR color aqua
+	scoreboard teams option IceR seeFriendlyInvisibles true
+	scoreboard teams option IceR collisionRule never
+	scoreboard teams option IceR friendlyfire false
+	scoreboard objectives add RS dummy Race Status
+	scoreboard teams add RSg Race Status Green
+	scoreboard teams add RSr Race Status Red
+	scoreboard teams option RSg color green
+	scoreboard teams option RSr color red
+	scoreboard teams join RSg IceR_Closed
+	scoreboard teams join RSr IceR_Open
+	scoreboard players set IceR_Open RS 8
+	scoreboard players reset IceR_Closed RS
+	summon AreaEffectCloud ~ ~ ~ {Duration:130,Tags:["IceRaceCD"]}
+	effect @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] clear
+	scoreboard players set /warp_ir IceRace 0
+	scoreboard teams join IceR /warp_ir
+	fill ~-4 ~-2 ~2 ~-4 ~-2 ~2 redstone_block
+	fill ~-5 ~-2 ~4 ~-5 ~-2 ~4 redstone_block
+
+:CBPMainClock CLOCK 10 10 0		[0 0 2 | 12 5 3]
+	minecraft:weather clear 1000000
+	minecraft:gamemode 2 @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=0]
+	minecraft:clear @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2]
+	scoreboard players add @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,team=!IceR] SPid 0
+	scoreboard players add @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,team=!IceR] IceRaceBC 0
+	scoreboard players set @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,team=!IceR,score_SPid=-2] SPid 1
+	scoreboard players set @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,team=!IceR,score_SPid_min=0] SPid 1
+	scoreboard teams join IceR @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,team=!IceR]
+	effect @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2,team=IceR] 14 3 0 true
+	effect @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2,team=IceR] 23 3 0 true
+	scoreboard players set @a[x=41,y=36,z=-32,dy=1,dz=1,c=1,m=2,score_IceRaceBC_min=0,score_IceRaceBC=0] IceRaceBC 1
+	execute @a[x=41,y=36,z=-32,dy=1,dz=1,c=1,m=2,score_IceRaceBC_min=1,score_IceRaceBC=1] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"selector":"@a[c=1,m=2]"},{"text":" took first place!","color":"green"}]}
+	execute @a[x=41,y=36,z=-32,dy=1,dz=1,c=1,m=2,score_IceRaceBC_min=1,score_IceRaceBC=1] ~ ~ ~ playsound minecraft:entity.player.levelup voice @a
+	execute @a[x=41,y=36,z=-32,dy=1,dz=1,c=1,m=2,score_IceRaceBC_min=1,score_IceRaceBC=1] ~ ~ ~ fill 42 33 -31 42 33 -32 redstone_block 0
+	scoreboard players set @a[x=41,y=36,z=-28,dy=1,c=1,m=2,score_IceRaceBC_min=0,score_IceRaceBC=0] IceRaceBC 2
+	execute @a[x=41,y=36,z=-28,dy=1,c=1,m=2,score_IceRaceBC_min=2,score_IceRaceBC=2] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"selector":"@a[c=1,m=2]"},{"text":" took second place!","color":"green"}]}
+	execute @a[x=41,y=36,z=-28,dy=1,c=1,m=2,score_IceRaceBC_min=2,score_IceRaceBC=2] ~ ~ ~ playsound minecraft:entity.player.levelup voice @a
+	execute @a[x=41,y=36,z=-28,dy=1,c=1,m=2,score_IceRaceBC_min=2,score_IceRaceBC=2] ~ ~ ~ fill 42 33 -28 42 33 -28 redstone_block 0
+	scoreboard players set @a[x=41,y=36,z=-35,dy=1,c=1,m=2,score_IceRaceBC_min=0,score_IceRaceBC=0] IceRaceBC 3
+	execute @a[x=41,y=36,z=-35,dy=1,c=1,m=2,score_IceRaceBC_min=3,score_IceRaceBC=3] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"selector":"@a[c=1,m=2]"},{"text":" took third place!","color":"green"}]}
+	execute @a[x=41,y=36,z=-35,dy=1,c=1,m=2,score_IceRaceBC_min=3,score_IceRaceBC=3] ~ ~ ~ playsound minecraft:entity.player.levelup voice @a
+	execute @a[x=41,y=36,z=-35,dy=1,c=1,m=2,score_IceRaceBC_min=3,score_IceRaceBC=3] ~ ~ ~ fill 42 33 -35 42 33 -35 redstone_block 0
+	execute @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2,score_IceRaceBC_min=1] ~ ~ ~ scoreboard players operation @a[r=1,c=1,m=2,score_IceRaceBC_min=1] IceRace = @a[r=1,c=1,m=2,score_IceRaceBC_min=1] IceRaceBC
+	scoreboard players operation @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2,score_IceRaceBC_min=1] IceRace *= -1 Number
+	scoreboard players operation @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2,score_IceRaceBC_min=1] IceRaceBC *= -1 Number
+
+:CBPCountdown CLOCK 10 10 0		[0 0 4 | 12 4 3]
+	scoreboard players add @e[type=AreaEffectCloud,tag=IceRaceCD] IceRaceCD 1
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=20,score_IceRaceCD=20] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"5","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=20,score_IceRaceCD=20] ~ ~ ~ execute @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 0.5
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=40,score_IceRaceCD=40] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"4","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=40,score_IceRaceCD=40] ~ ~ ~ execute @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 1
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=60,score_IceRaceCD=60] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"3","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=60,score_IceRaceCD=60] ~ ~ ~ execute @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 1.5
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=80,score_IceRaceCD=80] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"2","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=80,score_IceRaceCD=80] ~ ~ ~ execute @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=100,score_IceRaceCD=100] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"1","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=100,score_IceRaceCD=100] ~ ~ ~ execute @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=120,score_IceRaceCD=120] ~ ~ ~ execute @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] ~ ~ ~ playsound minecraft:entity.wither.death voice @a[c=1]
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=120,score_IceRaceCD=120] ~ ~ ~ tellraw @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"IR","color":"aqua","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Ice Race","color":"aqua"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"GO!","color":"green","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=120,score_IceRaceCD=120] ~ ~ ~ title @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43] title {"text":"GO!","color":"green"}
+	execute @e[type=AreaEffectCloud,tag=IceRaceCD,score_IceRaceCD_min=120,score_IceRaceCD=120] ~ ~ ~ fill 66 34 -42 66 34 -48 stonebrick 0 replace redstone_block 0
+
+:CBPMainEnd PULSE 10 10 0		[0 3 4 | 12 4 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	scoreboard objectives remove IceRace
+	scoreboard objectives remove IceRaceCD
+	scoreboard objectives remove IceRaceBC
+	scoreboard teams remove IceR
+	scoreboard players set IceR_Closed RS 8
+	scoreboard players reset IceR_Open RS
+	minecraft:kill @e[type=AreaEffectCloud,tag=IceRaceCD]
+	fill 42 33 -31 42 33 -32 air 0
+	fill 42 33 -28 42 33 -28 air 0
+	fill 42 33 -35 42 33 -35 air 0
+	effect @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2] clear
+	minecraft:clear @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2]
+	effect @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2] 6 20 100 true
+	minecraft:tp @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2] 49 36 -45 -90 0
+	scoreboard teams join NoPVP @a[x=34,y=2,z=-64,dx=141,dy=69,dz=43,m=2]
+	fill ~-2 ~-4 ~-2 ~-2 ~-4 ~-2 stonebrick
+	fill ~-1 ~-4 ~0 ~-1 ~-4 ~0 stonebrick
+	fill 66 34 -42 66 34 -48 redstone_block 0 replace stonebrick 0
+

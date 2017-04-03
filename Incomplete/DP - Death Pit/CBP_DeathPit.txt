@@ -1,0 +1,958 @@
+//#-p stonebrick 0 -print
+///	
+
+//<Defines
+DEFINE $s$ minecraft:
+DEFINE $ObjA$ scoreboard objectives add
+DEFINE $ObjR$ scoreboard objectives remove
+DEFINE $TeamO$ scoreboard teams option
+DEFINE $Style$ 16 16 0
+DEFINE $SA$ x=-188,y=24,z=78,dx=36,dy=30,dz=36
+DEFINE $DO$ x=#,y=#,z=#,dx=#,dy=#,dz=#
+DEFINE $SP$ x=#,y=#,z=#,dx=#,dy=#,dz=#
+DEFINE $SF$ x=#,y=#,z=#,dx=#,dy=#,dz=#
+DEFINE $SM$ x=#,y=#,z=#,dx=#,dy=#,dz=#
+DEFINE $TextStart$ {"text":"","extra":[{"text":"[","color":"gold","bold":true},{"text":"DP","color":"red","bold":true},{"text":"]:","color":"gold","bold":true},{"text":" "},
+
+DEFINE Deactivate fill |0| stonebrick 0
+DEFINE Activate fill |0| redstone_block 0
+DEFINE ScTG scoreboard players tag
+DEFINE ScOP scoreboard players operation
+DEFINE RevST scoreboard players tag @a[|0|] remove |0|
+DEFINE SetblockTestfor setblock ~ ~ ~ repeating_command_block 13 replace {TrackOutput:0b,auto:1b}
+DEFINE NumberAdd |0| Number = |0|
+DEFINE NumberObjAdd Number dummy
+
+///	SpawnMob coordinates
+DEFINE $SpawnMobN$ 
+DEFINE $SpawnMobS$ 
+DEFINE $SpawnMobE$ 
+DEFINE $SpawnMobW$ 
+DEFINE $SpawnMobNE$ 
+DEFINE $SpawnMobNW$ 
+DEFINE $SpawnMobSE$ 
+DEFINE $SpawnMobSW$ 
+
+FUNC Func_SpawnMobCardinal
+	summon ArmorStand $SpawnMobN$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+	summon ArmorStand $SpawnMobS$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+	summon ArmorStand $SpawnMobE$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+	summon ArmorStand $SpawnMobW$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+END
+
+FUNC Func_SpawnMobDiagonal
+	summon ArmorStand $SpawnMobNE$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+	summon ArmorStand $SpawnMobNW$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+	summon ArmorStand $SpawnMobSE$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+	summon ArmorStand $SpawnMobSW$ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPDonut"]}
+END
+
+FUNC $Stats$
+	@e[type=AreaEffectCloud,|0|] tellraw @e[$SA$,type=!AreaEffectCloud,|0|] baby i'm ballin
+	scoreboard players test |1| DP 0 0
+	CONDITION
+		scoreboard players reset |1| DP
+END
+
+DEFINE $Spawn$ @e[type=ArmorStand,DPSpawn,DPmo=|0|] @e[type=ArmorStand,DPDonut] summon |1| ~ ~ ~
+DEFINE $SpawnMid$ @e[type=ArmorStand,DPSpawn,DPmo=|0|] summon |1| PARSE($Middle$)
+DEFINE $Spawn2$ @e[type=ArmorStand,DPSpawn,DPmo|0|] |1| DP + 0
+DEFINE $Reg$ ArmorDropChances:[0f,0f,0f,0f],HandDropChances:[0f,0f],Invulnerable:1,Silent:1,DeathLootTable:"minecraft:empty"
+DEFINE $Reg2$ Invulnerable:1,Silent:1,DeathLootTable:"minecraft:empty"
+DEFINE $NoA$ ArmorItems:[{},{},{},{}]
+DEFINE $NoH$ HandItems:[{},{}]
+DEFINE $BoH$ HandItems:[{id:bow,Count:1b},{}]
+DEFINE $IrA$ ArmorItems:[{id:iron_boots,Count:1b},{id:iron_leggings,Count:1b},{id:iron_chestplate,Count:1b},{id:iron_helmet,Count:1b}]
+
+DEFINE $mod$ 1.1
+DEFINE $Middle$ -178 24 96 -90 0
+DEFINE $TPSpawn$ 
+//>
+
+//<Comments: To do
+FUNC Func_ToDoThings
+Mandatory:
+	Finalize defines (AFTER)
+	Make a book template
+	Finish books (AFTER)
+
+Additional:
+	Add / change mobs in mob clock (AFTER)
+	Lava floor toggle
+	Zombie toggle
+	Display all people alive / zombie / spectate
+	
+Features:
+	-Lingering health potions are customized to last longer
+END
+//>
+
+
+//<General Scoreboard Start
+FUNC Func_GeneralScoreboardStart
+	USE $ObjA$
+		DP dummy Death Pit
+		DP2 dummy Death Pit
+		DPpl dummy Players
+		DPde deathCount Deaths
+		DPdec deathCount Death Resurrection Calc
+		DPmo dummy Death Pit Mob Calcs
+		DPmo2 dummy Death Pit Mob Calcs
+		DPti dummy Death Pit Timer
+		NumberObjAdd
+	UNUSE
+	scoreboard objectives setdisplay sidebar DP
+	scoreboard objectives setdisplay belowName DPde2
+	scoreboard objectives setdisplay sidebar.team.white DP2
+	NumberAdd(x)
+	
+	scoreboard teams add DPp Death Pit Players
+	scoreboard teams option DPp color green
+	scoreboard teams option DPp collisionRule never
+	scoreboard teams option DPp friendlyfire false
+	
+	$s$time set 18000
+	gamerule doDaylightCycle false
+	
+	summon ArmorStand ~ ~ ~ {Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1,Tags:["DPSpawn","DPEntity"]}
+	
+	$s$xp -2147483648L @a[$SA$]
+END
+//>
+
+//<General Scoreboard Clock
+FUNC Func_GeneralScoreboardClock
+///	General
+	$s$weather clear 1000000
+	gamemode 2 @a[$SA$,m=0]
+	@a[$SA$,m=2] DPpl + 0
+	scoreboard teams join DPp @a[$SA$,m=2,DPpl=0,team=!DPp]
+	effect @a[$SA$,m=2,DPpl=0] 6 1 100 true
+	$s$tp @a[$SA$,m=2,DPpl=0] $Middle$
+	@a[$SA$,m=2,DPpl=0] DPpl = 1
+	
+///	Upon death
+	@a[DPde>=1,DPpl>=1<=8] summon AreaEffectCloud ~ ~ ~ {Tags:["DPResurrection","DPEntity"],Duration:1000000}
+	scoreboard teams leave @a[DPde>=1,DPpl>=1<=10,team=DPp]
+	@a[DPde>=1,DPpl>=1<=10] DPpl = 11
+	$s$tp @a[$SA$,DPpl=11] $TPSpawn$
+	@a[DPde>=1] DPde = 0
+	
+///	Upon warping back to spectate
+	scoreboard teams leave @a[$SP$,DPpl>=1<=10,team=DPp]
+	@a[$SP$,DPpl>=1<=10] DPpl = 11
+	
+///	Items
+	@e[$SA$,type=Item] DPmo + 0
+	entitydata @e[$SA$,type=Item,DPmo=0] {Invulnerable:1,Age:-32768s}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 1 {Item:{id:"minecraft:rotten_flesh"}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 1 {Item:{id:"minecraft:skull",Damage:2s}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 1 {Item:{id:"minecraft:leather_chestplate"}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 1 {Item:{id:"minecraft:leather_leggings"}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 1 {Item:{id:"minecraft:leather_boots"}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 1 {Item:{id:"minecraft:wooden_sword"}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 1 {Item:{id:"minecraft:glass_bottle"}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 2 {Item:{tag:{CanDestroy:["minecraft:bedrock"]}}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 3 {Item:{id:"minecraft:skull",Damage:4s,tag:{display:{Name:"BOOMSHAKALAKA"}}}}
+	@e[$SA$,type=Item,DPmo=0] DPmo = 4 {Item:{id:"minecraft:skull",Damage:1s,tag:{display:{Name:"MobBeGone Miracle Spray"}}}}
+	
+///	Prevents friendly zombies to pick up items
+	@a[$SA$,DPpl>=9<=10] ~ ~1 ~ entitydata @e[type=Item,DPmo=2,r=3] {PickupDelay:20}
+	@a[$SA$,DPpl>=9<=10] ~ ~1 ~ @e[type=Item,DPmo=2,r=3] particle happyVillager ~ ~ ~ 0.1 0.1 0.1 0 0 force @a 
+	
+///	Special Items
+	entitydata @e[$SA$,type=Item,DPmo>=3<=4] {PickupDelay:32767}
+	@e[$SA$,type=Item,DPmo>=3<=4] DPmo2 = 1 {OnGround:1b}
+	
+	@e[$SA$,type=Item,DPmo=3,DPmo2=1] summon Creeper ~ ~ ~ {Fuse:0s,ExplosionRadius:2.5,CustomName:"BOOMSHAKALAKA",CustomNameVisible:1}
+	@e[$SA$,type=Item,DPmo=3,DPmo2=1] particle smoke -187 37 106 1 0 1 0 200
+	@e[$SA$,type=Item,DPmo=3,DPmo2=1] playsound minecraft:entity.wither.ambient voice @a
+	@e[$SA$,type=Item,DPmo=3,DPmo2=1] $s$kill @e[tag=DPMob,r=3]
+	@e[$SA$,type=Item,DPmo=3,DPmo2=1] effect @a[m=2,r=5] 10 5 4 true
+	
+///	Kills all items
+	$s$kill @e[$SA$,type=Item,DPmo=1]
+	$s$kill @e[$SA$,type=Item,DPmo>=3<=4,DPmo2=1]
+	
+///	Lingering Heath Potion	
+	@e[$SA$,type=AreaEffectCloud] DPmo + 0 {Potion:"minecraft:strong_healing"}
+	entitydata @e[$SA$,type=AreaEffectCloud,DPmo=0] {Duration:400,RadiusPerTick:0,RadiusOnUse:0}
+	@e[$SA$,type=AreaEffectCloud,DPmo=0] DPmo = 1
+END
+//>
+
+//<General Scoreboard End
+FUNC Func_GeneralScoreboardEnd
+	$s$clear @a[$SA$,m=2,DPpl>=0]
+	$s$xp -2147483648L @a[$SA$,m=2,DPpl>=0]
+	effect @a[$SA$,m=2,DPpl>=0] clear
+	effect @a[$SA$,m=2,DPpl>=0] 6 1 100 true
+	$s$tp @a[$SA$,m=2,DPpl>=0] $TPSpawn$
+	
+	USE $ObjR$
+		DP
+		DP2
+		DPpl
+		DPde
+		DPdec
+		DPmo
+		DPti
+	UNUSE
+	
+	time set 60000 games
+	$s$kill @e[$SA$,DPMob]
+	$s$kill @e[$SA$,type=Item]
+	$s$kill @e[$SA$,type=XPOrb]
+	$s$kill @e[type=AreaEffectCloud,DPEntity]
+	$s$kill @e[type=AreaEffectCloud,DPEntity]
+END
+//>
+
+
+//<Display Start
+FUNC Func_DisplayStart
+	scoreboard teams add DPd_r DP Display Red
+	scoreboard teams option DPd_r color red
+	scoreboard teams add DPd_g DP Display Green
+	scoreboard teams option DPd_g color green
+///	scoreboard teams add DPd_y DP Display Yellow
+///	scoreboard teams option DPd_y color yellow
+/// baby i'm ballin
+	
+	summon Item -190 43 87 {Age:6000s,Item:{id:"minecraft:stone",Count:1b},Passengers:[{id:AreaEffectCloud,Tags:["DPStats","DPS_Z"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Zombies"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_ZJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Z_Jockeys"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_Sk"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Skeletons"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_WS"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"W_Skeles"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_Sp"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Spiders"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_SJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"S_Jockeys"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_CS"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"C_Spiders"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_CSJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"CS_Jockeys"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_Wi"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Witches"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_Wo"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Wolves"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_B"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Blazes"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_G"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Guardians"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_KB"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"K_Bunnies"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_C"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Creepers"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_CC"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"C_Creepers"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_CJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"C_Jockeys"}},{id:AreaEffectCloud,Tags:["DPStats","DPS_KS"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"K_Skele"}}]}
+	
+	scoreboard teams join DPd_r Zombies Z_Jockeys Skeletons W_Skeles Spiders S_Jockeys C_Spiders CS_Jockeys Witches Wolves Blazes Guardians K_Bunnies Creepers C_Creepers C_Jockeys K_Skele
+	scoreboard teams join DPd_g Players F_Zombies
+	
+FUNC Func_commentsasdfasd
+	summon Item -190 43 87 {Age:6000s,Item:{id:"minecraft:stone",Count:1b},Passengers:[
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_Z"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Zombies"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_ZJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Z_Jockeys"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_Sk"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Skeletons"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_WS"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"W_Skeles"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_Sp"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Spiders"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_SJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"S_Jockeys"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_CS"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"C_Spiders"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_CSJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"CS_Jockeys"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_Wi"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Witches"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_Wo"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Wolves"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_B"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Blazes"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_G"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Guardians"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_KB"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"K_Bunnies"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_C"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Creepers"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_CC"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"C_Creepers"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_CJ"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"C_Jockeys"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_ZP"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"Z_Pigmen"}},
+	{id:AreaEffectCloud,Tags:["DPStats","DPEntity","DPS_KS"],Duration:1000000,CommandStats:{AffectedEntitiesObjective:"DP",AffectedEntitiesName:"K_Skele"}}
+	]}
+END
+END
+//>
+
+//<Display Clock
+FUNC Func_DisplayClock
+	Players DPpl = 0
+	F_Zombies DPpl = 0
+	@a[$SA$,m=2,DPpl>=1<=8] Players DPpl + 1
+	@a[$SA$,m=2,DPpl>=9<=10] F_Zombies DPpl + 1
+	ScOP Players DP = Players DPpl
+	ScOP Players DP2 = Players DPpl
+	ScOP F_Zombies DP = F_Zombies DPpl
+	ScOP F_Zombies DP2 = F_Zombies DPpl
+	
+	$Stats$(DPS_Z;Zombies)
+	$Stats$(DPS_ZJ;Z_Jockeys)
+	$Stats$(DPS_Sk;Skeletons)
+	$Stats$(DPS_WS;W_Skeles)
+	$Stats$(DPS_Sp;Spiders)
+	$Stats$(DPS_SJ;S_Jockeys)
+	$Stats$(DPS_CS;C_Spiders)
+	$Stats$(DPS_CSJ;CS_Jockeys)
+	$Stats$(DPS_Wi;Witches)
+	$Stats$(DPS_Wo;Wolves)
+	$Stats$(DPS_B;Blazes)
+	$Stats$(DPS_G;Guardians)
+	$Stats$(DPS_KB;K_Bunnies)
+	$Stats$(DPS_C;Creepers)
+	$Stats$(DPS_CC;C_Creepers)
+	$Stats$(DPS_CJ;C_Jockeys)
+	$Stats$(DPS_ZP;Z_Pigmen)
+	$Stats$(DPS_KS;K_Skele)
+END
+//>
+
+//<Display End
+FUNC Func_DisplayEnd
+	scoreboard teams remove DPd_r
+	scoreboard teams remove DPd_g
+///	scoreboard teams remove DPd_y
+END
+//>
+
+
+
+//<Lava Floor
+FUNC Func_LavaFloorOn
+
+END
+
+FUNC Func_LavaFloorOff
+
+END
+//>
+
+//<Kill All Mobs
+FUNC Func_KillAllMobs
+	$s$kill @e[$SA$,DPMob]
+END
+//>
+
+//<Summon Mob Numbers
+FUNC Func_SpawnMob4
+	$s$kill @e[$DO$,type=ArmorStand,DPDonut]
+	@e[type=ArmorStand,DPSpawn] DPmo + 1
+	Func_SpawnMobCardinal
+END
+
+FUNC Func_SpawnMob8
+	$s$kill @e[$DO$,type=ArmorStand,DPDonut]
+	@e[type=ArmorStand,DPSpawn] DPmo + 1
+	Func_SpawnMobCardinal
+	Func_SpawnMobDiagonal
+END
+
+FUNC Func_SpawnMob12
+	$s$kill @e[$DO$,type=ArmorStand,DPDonut]
+	@e[type=ArmorStand,DPSpawn] DPmo + 1
+	Func_SpawnMobCardinal
+	Func_SpawnMobCardinal
+	Func_SpawnMobDiagonal
+END
+
+FUNC Func_SpawnMob16
+	$s$kill @e[$DO$,type=ArmorStand,DPDonut]
+	@e[type=ArmorStand,DPSpawn] DPmo + 1
+	Func_SpawnMobCardinal
+	Func_SpawnMobCardinal
+	Func_SpawnMobDiagonal
+	Func_SpawnMobDiagonal
+END
+
+FUNC Func_SpawnMob20
+	$s$kill @e[$DO$,type=ArmorStand,DPDonut]
+	@e[type=ArmorStand,DPSpawn] DPmo + 1
+	Func_SpawnMobCardinal
+	Func_SpawnMobCardinal
+	Func_SpawnMobCardinal
+	Func_SpawnMobDiagonal
+	Func_SpawnMobDiagonal
+END
+
+FUNC Func_SpawnMob24
+	$s$kill @e[$DO$,type=ArmorStand,DPDonut]
+	@e[type=ArmorStand,DPSpawn] DPmo + 1
+	Func_SpawnMobCardinal
+	Func_SpawnMobCardinal
+	Func_SpawnMobCardinal
+	Func_SpawnMobDiagonal
+	Func_SpawnMobDiagonal
+	Func_SpawnMobDiagonal
+END
+//>
+
+//<Countdown Start
+FUNC Func_CountdownStart
+	summon AreaEffectCloud ~ ~ ~ {Tags:["DPEntity","DPCountdown"],Duration:1000000}
+	@e[type=AreaEffectCloud,DPCountdown] DPti = -1
+END
+//>
+
+//<Countdown Clock
+FUNC Func_CountdownClock
+	testfor @e[type=AreaEffectCloud,DPCountdown]
+	SetblockTestfor
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti>=-1] DPti + 1
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti=0] tellraw @a $TextStart${"text":"5!","color":"yellow"}]}
+	@e[type=AreaEffectCloud,DPCountdown,DPti=0] @a playsound minecraft:block.note.pling voice @a[c=1] ~ ~ ~ 0.5
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti=20] tellraw @a $TextStart${"text":"4!","color":"yellow"}]}
+	@e[type=AreaEffectCloud,DPCountdown,DPti=20] @a playsound minecraft:block.note.pling voice @a[c=1] ~ ~ ~ 1
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti=40] tellraw @a $TextStart${"text":"3!","color":"yellow"}]}
+	@e[type=AreaEffectCloud,DPCountdown,DPti=40] @a playsound minecraft:block.note.pling voice @a[c=1] ~ ~ ~ 1.5
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti=60] tellraw @a $TextStart${"text":"2!","color":"yellow"}]}
+	@e[type=AreaEffectCloud,DPCountdown,DPti=60] @a playsound minecraft:block.note.pling voice @a[c=1] ~ ~ ~ 2
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti=80] tellraw @a $TextStart${"text":"1!","color":"yellow"}]}
+	@e[type=AreaEffectCloud,DPCountdown,DPti=80] @a playsound minecraft:block.note.pling voice @a[c=1] ~ ~ ~ 2
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti=100] tellraw @a $TextStart${"text":"Begin!","color":"yellow"}]}
+	@e[type=AreaEffectCloud,DPCountdown,DPti=100] entitydata @e[$SA$,DPMob] {Silent:0,Invulnerable:1}
+	@e[type=AreaEffectCloud,DPCountdown,DPti=100] effect @e[-188,24,78,dx=36,dy=30,dz=36,tag=DPMob] 8 3 255 true
+	@e[type=AreaEffectCloud,DPCountdown,DPti=100] @a playsound entity.experience_orb.touch voice @a[c=1]
+	@e[type=AreaEffectCloud,DPCountdown,DPti=100] //(Fill donut with air)
+	@e[type=AreaEffectCloud,DPCountdown,DPti=103] @a playsound entity.experience_orb.touch voice @a[c=1]
+	@e[type=AreaEffectCloud,DPCountdown,DPti=106] @a playsound entity.experience_orb.touch voice @a[c=1]
+	
+	@e[type=AreaEffectCloud,DPCountdown,DPti=200] //(Structure Block)
+	$s$kill @e[type=AreaEffectCloud,DPCountdown,DPti>=200]
+END
+//>
+
+//<Spawn Mob Clock
+FUNC Func_SpawnMobClock
+	testfor @e[type=ArmorStand,DPSpawn,DPmo>=1]
+	SetblockTestfor
+	
+	ScOP @e[type=ArmorStand,DPSpawn,DPmo>=1] = MobType DPSave
+///	Zombie
+	$Spawn$(1;Zombie) {Tags:["DPS_Z","DPMob"],$NoA$,$NoH$,$Reg$}
+	$Spawn$(2;Zombie) {Tags:["DPS_Z","DPMob"],$NoA$,HandItems:[{id:iron_sword,Count:1b},{}],$Reg$}
+	$Spawn$(3;Zombie) {Tags:["DPS_Z","DPMob"],$IrA$,$NoH$,$Reg$}
+	$Spawn$(4;Zombie) {Tags:["DPS_Z","DPMob"],$IrA$,HandItems:[{id:iron_sword,Count:1b},{}],$Reg$}
+	$Spawn2$(>=1<=4;Zombies)
+	$Spawn$(5;Chicken) {Tags:["DPMob"],$Reg2$,Passengers:[{id:Zombie,Tags:["DPS_ZJ","DPMob"],$NoA$,$NoH$,$Reg$}]}
+	$Spawn2$(=5;Z_Jockeys)
+	$Spawn$(6;Zombie) {Tags:["DPS_Z","DPMob","DPJade"],IsBaby:1,CustomName:"Mini Jade",ArmorItems:[{id:leather_boots,Count:1b,tag:{display:{color:16777215}}},{id:leather_leggings,Count:1b,tag:{display:{color:16777215}}},{id:leather_chestplate,Count:1b,tag:{display:{color:15892389}}},{id:skull,Count:1b,Damage:3s,tag:{SkullOwner:Jadeofalltrades}}],$NoH$,$Reg$}
+	$Spawn2$(=6;Zombies)
+	$Spawn$(7;Chicken) {Tags:["DPMob"],$Reg2$,Passengers:[{id:Zombie,Tags:["DPS_ZJ","DPMob","DPJade"],IsBaby:1,CustomName:"Mini Jade",ArmorItems:[{id:leather_boots,Count:1b,tag:{display:{color:16777215}}},{id:leather_leggings,Count:1b,tag:{display:{color:16777215}}},{id:leather_chestplate,Count:1b,tag:{display:{color:15892389}}},{id:skull,Count:1b,Damage:3s,tag:{SkullOwner:Jadeofalltrades}}],$NoH$,$Reg$}]}
+	$Spawn2$(=7;Z_Jockeys)
+	$Spawn$(8;Zombie) {Tags:["DPS_Z","DPMob"],ArmorItems:[{id:chainmail_boots,Count:1b},{id:chainmail_leggings,Count:1b},{id:chainmail_chestplate,Count:1b},{id:skull,Count:1b,Damage:4s,tag:{display:{Name:"BOOMSHAKALAKA"}}}],HandItems:[{id:golden_sword,Count:1b,tag:{Unbreakable:1,ench:[{id:19,lvl:2}]}},{}],ArmorDropChances:[0f,0f,0f,0.75f],HandDropChances:[0.35f,0f],$Reg2$}
+	$Spawn$(9;Zombie) {Tags:["DPS_Z","DPMob","DPSavvy"],CustomName:"Smelly Savvy",ArmorItems:[{id:leather_boots,Count:1b},{id:leather_leggings,Count:1b,tag:{display:{color:6704179}}},{id:leather_chestplate,Count:1b,tag:{display:{color:6717235}}},{id:skull,Count:1b,Damage:3s,tag:{SkullOwner:"savvykms"}}],$NoH$,$Reg$}
+	$Spawn$(10;Zombie) {Tags:["DPS_Z","DPMob","DPFire"],CustomName:"Chars",Fire:32767s,Attributes:[{Name:"generic.movementSpeed",Base:0.35}],ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:12b,Amplifier:0b,Ambient:0b},{ShowParticles:0b,Duration:1000000,Id:14b,Amplifier:0b,Ambient:0b}],ArmorItems:[{},{},{},{id:skull,Count:1b,Damage:2s}],$NoH$,$Reg$}
+	$Spawn2$(>=8<=10;Zombies)
+	//(Regular Baby Zombie)
+	//(Desert Zombie)
+	//(Rebalance chars to be slow but tanky and hits hard)
+	
+///	Skeleton
+	$Spawn$(50;Skeleton) {Tags:["DPS_Sk","DPMob"],$NoA$,$BoH$,$Reg$}
+	$Spawn$(51;Skeleton) {Tags:["DPS_Sk","DPMob"],$NoA$,HandItems:[{id:bow,Count:1b,tag:{ench:[{id:49,lvl:1}]}},{}],$Reg$}
+	$Spawn$(52;Skeleton) {Tags:["DPS_Sk","DPMob"],$IrA$,$BoH$,$Reg$}
+	$Spawn$(53;Skeleton) {Tags:["DPS_Sk","DPMob"],$IrA$,HandItems:[{id:bow,Count:1b,tag:{ench:[{id:49,lvl:1}]}},{}],$Reg$}
+	$Spawn2$(>=50<=53;Skeletons)
+	$Spawn$(54;Skeleton) {Tags:["DPS_WS","DPMob"],SkeletonType:1,$NoA$,HandItems:[{id:stone_sword,Count:1},{}],$Reg$}
+	$Spawn$(54;Skeleton) {Tags:["DPS_WS","DPMob"],SkeletonType:1,ArmorItems:[{id:iron_boots,Count:1b},{id:iron_leggings,Count:1b},{id:iron_chestplate,Count:1b},{id:skull,Count:1b,Damage:1s,tag:{display:{Name:"MobBeGone Miracle Spray"}}}],HandItems:[{id:stone_sword,Count:1},{}],ArmorDropChances:[0f,0f,0f,0.25f],HandDropChances:[0f,0f],$Reg2$}
+	$Spawn2$(>=54<=55;W_Skeles)
+	//(Boss Skeleton)
+	//(Slowness Skeleton)
+	
+///	Spiders / Cave Spiders
+	$Spawn$(100;Spider) {Tags:["DPS_Sp","DPMob"],$Reg2$}
+	$Spawn$(101;Spider) {Tags:["DPS_Sp","DPMob"],ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:14b,Amplifier:0b,Ambient:0b}],$Reg2$}
+	$Spawn2$(>=100<=101;Spiders)
+	$Spawn$(102;Spider) {Tags:["DPS_SJ","DPMob"],$Reg2$,Passengers:[{id:Skeleton,Tags:["DPS_SJ","DPMob"],$NoA$,$BoH$,$Reg$}]}
+	$Spawn$(103;Spider) {Tags:["DPS_SJ","DPMob"],$Reg2$,ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:14b,Amplifier:0b,Ambient:0b}],Passengers:[{id:Skeleton,Tags:["DPS_SJ","DPMob"],$NoA$,$BoH$,$Reg$}]}
+	$Spawn2$(>=102<=103;S_Jockeys)
+	$Spawn$(104;Spider) {Tags:["DPS_Sp","DPMob","DPFire"],CustomName:"FlameVenom",Fire:32767s,HandItems:[{id:blaze_rod,Count:1b,tag:{ench:[{id:20,lvl:2}]}},{}],ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:12b,Amplifier:0b,Ambient:0b}],$Reg$}
+	$Spawn2$(>=104;Spiders)
+	//(Change spidervenom to have a longer hitting fire attack, but deals minimal damage)
+	
+	$Spawn$(110;CaveSpider) {Tags:["DPS_CS","DPMob"],$Reg2$}
+	$Spawn$(111;CaveSpider) {Tags:["DPS_CS","DPMob"],ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:14b,Amplifier:0b,Ambient:0b}],$Reg2$}
+	$Spawn2$(>=110<=111;C_Spiders)
+	$Spawn$(112;CaveSpider) {Tags:["DPS_CSJ","DPMob"],$Reg2$,Passengers:[{id:Skeleton,Tags:["DPS_CSJ","DPMob"],$NoA$,$BoH$,$Reg$}]}
+	$Spawn$(113;CaveSpider) {Tags:["DPS_CSJ","DPMob"],ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:14b,Amplifier:0b,Ambient:0b}],$Reg2$,Passengers:[{id:Skeleton,Tags:["DPS_CSJ","DPMob"],$NoA$,$BoH$,$Reg$}]}
+	$Spawn2$(>=112<=113;CS_Jockeys)
+	$Spawn$(114;CaveSpider) {Tags:["DPS_CJ","DPMob"],$Reg2$Passengers:[{id:Creeper,Tags:["DPS_CJ","DPMob"],$Reg2$}]}
+	$Spawn2$(=114;C_Jockeys)
+	
+///	Witch
+	$Spawn$(150;Witch) {Tags:["DPS_Wi","DPMob"],$Reg2$}
+	$Spawn$(151;Witch) {Tags:["DPS_Wi","DPMob"],ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:11b,Amplifier:0b,Ambient:0b}],$Reg2$}
+	$Spawn$(152;Witch) //(Fire resistance potion drop, resistance 2)
+	$Spawn2$(>=150<=152;Witches)
+	
+///	Wolf
+	$Spawn$(200;Wolf) {Tags:["DPS_Wo","DPMob"],$Reg2$}
+	$Spawn$(201;Wolf) {Tags:["DPS_Wo","DPMob"],ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:12b,Amplifier:0b,Ambient:0b}],$Reg2$}
+	$Spawn2$(>=200<=201;Wolves)
+	//(Regeneration 2)
+	//(Regeneration 2 and fire resistance)
+	
+///	Blaze
+	$Spawn$(250;Blaze) {Tags:["DPS_B","DPMob"],$Reg2$}
+	$Spawn2$(=250;Blazes)
+	//(Blaze Turret)
+	summon Blaze -170 30 96 {Tags:["DPS_BT","DPMob"],NoAI:1,Health:150f,Fire:32767s,Attributes:[{Name:"generic.maxHealth",Base:150d},{Name:"generic.knockbackResistance",Base:1}],CustomName:"Blaze Turret",$Reg$}
+	
+///	Guardian
+	$Spawn$(300;Guardian) {Tags:["DPS_G","DPMob"],$Reg2$}
+	$Spawn2$(=300;Guardians)
+	//(Fire Resistance)
+	
+///	Killer Bunny
+	$Spawn$(350;Rabbit) {Tags:["DPS_KB","DPMob"],RabbitType:99,CustomName:"A Harmless Bunny",$Reg2$}
+	$Spawn2$(=350;K_Bunnies)
+	
+///	Creeper
+	$Spawn$(400;Creeper) {Tags:["DPS_C","DPMob"],$Reg2$}
+	$Spawn2$(=400;Creepers)
+	//(Charged Creeper)
+	///summon Creeper -170 30 96 {Tags:["DPS_CC","DPMob"],powered:1,ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:12b,Amplifier:0b,Ambient:0b}],Silent:1,DeathLootTable:"minecraft:empty",$Reg2$}
+	//(Fire Explosion)
+	///{CustomName:"Fireball",Fire:32767s,ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:12b,Amplifier:0b,Ambient:0b}],Tags:["DPS_C","DPMob","DPFire"],Silent:1,DeathLootTable:"minecraft:empty"}
+	///Have it so an invisible armor stand is above it, and once it lands, summons a fireball
+	
+///	Zombie Pigman
+	$Spawn$(450;PigZombie) {Tags:["DPS_ZP","DPMob"],$Reg$}
+	$Spawn$(451;PigZombie) {Tags:["DPS_ZP","DPMob"],CustomName:"LOLOLOL",Attributes:[{Name:"generic.attackDamage",Base:0},{Name:"generic.movementSpeed",Base:0.35}],$NoA$,HandItems:[{id:sign,Count:1b,tag:{ench:[{id:19,lvl:2}]}},{}],$Reg$}
+	$Spawn$(452;PigZombie) {Tags:["DPS_ZP","DPMob"],CustomName:"Zisteau",ArmorItems:[{},{id:leather_leggings,Count:1b,tag:{ench:[{id:0,lvl:3}]}},{},{}],HandItems:[{id:lava_bucket,Count:1b,tag:{ench:[{id:20,lvl:1},{id:16,lvl:1}]}},{}],$Reg$}
+	$Spawn2$(>=450<=452;Z_Pigmen)
+	
+//(Polar bears)
+//(Man Bear Pig)
+//(Baby Polar bear at mid, killed when all polar bears are dead)
+	
+	@e[type=ArmorStand,DPSpawn,DPSave>=1] DPSave = 0
+END
+//>
+
+//<Equpiment Clock
+FUNC Func_EqupimentClock
+	testfor @a[DPpl>=1<=7]
+	SetblockTestfor
+///	DPpl
+///	1 = new, 2 = refresh potions only, 3 = refresh food only, 4 = lapis, 5 = snowballs, 6 = bones, 7 = arrows, 8 = Normal, 9 = Zombie start, 10 = Zombie Fin, 11 = Dead
+	
+	$s$clear @a[$SA$,m=2,DPpl=1]
+	$s$clear @a[$SA$,m=2,DPpl=2] potion
+	$s$clear @a[$SA$,m=2,DPpl=2] lingering_potion
+	$s$clear @a[$SA$,m=2,DPpl=3] melon
+	$s$clear @a[$SA$,m=2,DPpl=3] bread
+	$s$clear @a[$SA$,m=2,DPpl=3] cooked_porkchop
+	$s$clear @a[$SA$,m=2,DPpl=4] dye
+	$s$clear @a[$SA$,m=2,DPpl=5] snowballs
+	$s$clear @a[$SA$,m=2,DPpl=6] bones
+	effect @a[$SA$,m=2,DPpl>=1<=7] clear
+	$s$xp -2147483648L @a[$SA$,m=2,DPpl>=1<=7]
+	
+	scoreboard players test Melee DPSave 1 1
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.hotbar.0 iron_sword 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Melee DPSave 2 2
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.hotbar.0 iron_axe 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Melee DPSave 3 3
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.hotbar.0 diamond_sword 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Melee DPSave 4 4
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.hotbar.0 diamond_axe 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	scoreboard players test Bow DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] bow 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Bow DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] arrow 20 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Bow DPSave 1 1
+	CONDITION
+		$s$clear @a[$SA$,m=2,DPpl=7] arrow
+	scoreboard players test Bow DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=7] arrow 20 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	
+	scoreboard players test Bow DPSave 2 2
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] bow 1 0 {ench:[{id:51,lvl:1}],Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Bow DPSave 2 2
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.inventory.8 arrow 1 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	scoreboard players test Shield DPSave 1 1
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.weapon.offhand shield 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	scoreboard players test Armor DPSave 1 1
+	CONSTART
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.head golden_helmet 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.chest golden_chestplate 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.legs golden_leggings 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.feet golden_boots 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	CONEND
+	
+	scoreboard players test Armor DPSave 2 2
+	CONSTART
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.head iron_helmet 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.chest iron_chestplate 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.legs iron_leggings 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.feet iron_boots 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	CONEND
+	
+	scoreboard players test Armor DPSave 3 3
+	CONSTART
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.head diamond_helmet 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.chest diamond_chestplate 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.legs diamond_leggings 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.armor.feet diamond_boots 1 0 {Unbreakable:1,CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	CONEND
+	
+	
+	scoreboard players test Potion DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl>=1<=2] potion 4 0 {Potion:"healing",CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Potion DPSave 2 2
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl>=1<=2] lingering_potion 1 0 {Potion:"strong_healing",CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	scoreboard players test Food DPSave 0 0
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] melon 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Food DPSave 0 0
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=3] melon 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Food DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] bread 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Food DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=3] bread 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Food DPSave 2 2
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] cooked_porkchop 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Food DPSave 2 2
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=3] cooked_porkchop 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Food DPSave 3 3
+	CONDITION
+		effect @a[$SA$,m=2,DPpl=1] 23 1000000 0 true {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Food DPSave 3 3
+	CONDITION
+		effect @a[$SA$,m=2,DPpl=3] 23 1000000 0 true {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	scoreboard players test Snowballs DPSave 1 1
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.hotbar.8 snowball 16 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Snowballs DPSave 1 1
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=5] slot.hotbar.8 snowball 16 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Snowballs DPSave 2 2
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=1] slot.hotbar.8 snowball 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Snowballs DPSave 2 2
+	CONDITION
+		replaceitem entity @a[$SA$,m=2,DPpl=5] slot.hotbar.8 snowball 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	scoreboard players test Bones DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] bone 16 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Bones DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=6] bone 16 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	scoreboard players test Bones DPSave 2 2
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] bone 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Bones DPSave 2 2
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=6] bone 64 0 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	scoreboard players test Lapis DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=1] dye 64 4 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	scoreboard players test Bones DPSave 1 1
+	CONDITION
+		$s$give @a[$SA$,m=2,DPpl=4] dye 64 4 {CanDestroy:["minecraft:bedrock"],HideFlags:8}
+	
+	
+	@a[DPpl>=1<=7] DPpl = 8
+END
+//>
+
+
+//<Mob Clock: Resurrection
+FUNC Func_MobClock_Resurrection
+	testfor @e[type=AreaEffectCloud,DPResurrection]
+	SetblockTestfor
+	
+	@e[type=AreaEffectCloud,DPResurrection] summon Zombie ~ ~ ~ {Tags:["DPResurrection","DPS_Z","DPMob"],CustomName:"The Resurrection",ActiveEffects:[{ShowParticles:0b,Duration:1000000,Id:12b,Amplifier:0b,Ambient:0b}],ArmorItems:[{id:golden_boots,Count:1b},{id:golden_leggings,Count:1b},{id:golden_chestplate,Count:1b},{id:golden_helmet,Count:1b,tag:{AttributeModifiers:[{AttributeName:"generic.movementSpeed",Name:"anything",Amount:0.4,Operation:1,UUIDLeast:1,UUIDMost:1,Slot:head}]}}],$NoH$,$Reg$}
+	@e[type=AreaEffectCloud,DPResurrection] playsound minecraft:entity.wither.spawn voice @a ~ ~ ~ 0.5
+	@e[type=AreaEffectCloud,DPResurrection] scoreboard players add Zombies DP 1
+	@e[type=Zombie,DPResurrection] DPmo + 0
+	
+	scoreboard players test Melee DPSave 1 1
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon iron_sword 1 0
+	scoreboard players test Melee DPSave 1 1
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon iron_axe 1 0
+	scoreboard players test Melee DPSave 1 1
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon diamond_sword 1 0
+	scoreboard players test Melee DPSave 1 1
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon diamond_axe 1 0
+	
+	scoreboard players test Food DPSave 0 0
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon.offhand melon 1 0
+	scoreboard players test Food DPSave 1 1
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon.offhand bread 1 0
+	scoreboard players test Food DPSave 2 2
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon.offhand cooked_porkchop 1 0
+	
+	scoreboard players test Shield DPSave 1 1
+	CONDITION
+		replaceitem entity @e[type=Zombie,DPResurrection,DPmo=0] slot.weapon.offhand shield 1 0
+	
+	@e[type=Zombie,DPResurrection,DPmo=0] DPmo = 1
+END
+//>
+
+//<Mob Clock: Jade
+FUNC Func_MobClock_Jade
+	testfor @e[type=Zombie,DPJade]
+	SetblockTestfor
+	
+	@r[$SA$,type=Zombie,DPJade] DPmo + 0
+	@e[$SA$,type=Zombie,DPJade,DPmo>=0<=9] DPmo + 1
+	@e[$SM$,type=Zombie,DPmo=10] particle heart ~ ~1.5 ~ 0 0 0 0 1 force @a
+	@e[$SA$,type=Zombie,DPJade,DPmo=10] DPmo = 0
+END
+//>
+
+//<Mob Clock: Smelly Savvy
+FUNC Func_MobClock_SmellySavvy
+	testfor @e[$SM$,type=Zombie,DPSavvy]
+	SetblockTestfor
+	
+	@e[$SM$,type=Zombie,DPSavvy] effect @a[m=2,r=2,DPpl>=1<=8] 19 5 0 true
+	@e[$SM$,type=Zombie,DPSavvy] particle mobSpell ~ ~1 ~ 3.45 6.31 1.60 0.1 0
+	@e[$SM$,type=Zombie,DPSavvy] particle mobSpell ~ ~1 ~ 3.45 6.31 1.60 0.1 0
+END
+//>
+
+//<Mob Clock: Chicken
+FUNC Func_MobClock_Chicken
+	testfor @e[type=Chicken,DPChicken]
+	SetblockTestfor
+	
+	@e[$SF$,type=AreaEffectCloud,DPti>=100<=105] entitydata @e[type=Chicken,DPChicken] {Silent:1}
+	@e[$SF$,type=Chicken,DPChicken] DPmo = 1 {OnGround:1b}
+	$s$kill @e[$SF$,type=Chicken,DPChicken,DPmo=1]
+END
+//>
+
+//<Mob Clock: Fire
+FUNC Func_MobClock_Fire
+	testfor @e[DPFire]
+	SetblockTestfor
+	
+	@e[$SM$,type=Zombie,DPFire] particle flame ~ ~1 ~ 0.1 0.7 0.1 0.05 1 force @a
+	@e[$SM$,type=Blaze,DPFire] particle flame ~ ~1 ~ 0.1 0.5 0.1 0.03 1 force @a
+	@e[$SM$,type=Creeper,DPFire] particle flame ~ ~1 ~ 0.1 0.7 0.1 0.05 1 force @a
+	@e[$SM$,type=Spider,DPFire] particle flame ~ ~ ~ 0.1 0 0.1 0.05 1 force @a
+END
+//>
+
+//<Mob Clock: Blaze Turret
+FUNC Func_MobClock_BlazeTurret
+	testfor @e[type=Blaze,DPFire]
+	SetblockTestfor
+	
+	@e[$SF$,type=Blaze,DPFire] DPmo + 0 {OnGround:1b}
+	@e[$SM$,type=Blaze,DPFire] DPmo2 + 0
+	@e[$SF$,type=Blaze,DPFire,DPmo>=0<=4] DPmo + 1
+	
+	//(Change so it only fires on two sides instead of four so zombie can spawn in mid)
+	//(Reduce health to 175 or make invulnerable until all are killed)
+	@e[$SF$,type=Blaze,DPFire,DPmo=4] summon SmallFireball ~1 ~ ~ {direction:[0.15d,0d,0d],power:[0.1d,0d,0d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	@e[$SF$,type=Blaze,DPFire,DPmo=4] summon SmallFireball ~-1 ~ ~ {direction:[-0.15d,0d,0d],power:[-0.1d,0d,0d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	@e[$SF$,type=Blaze,DPFire,DPmo=4] summon SmallFireball ~ ~ ~1 {direction:[0d,0d,0.15d],power:[0d,0d,0.1d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	@e[$SF$,type=Blaze,DPFire,DPmo=4] summon SmallFireball ~ ~ ~-1 {direction:[0d,0d,-0.15d],power:[0d,0d,-0.1d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	
+	@e[$SF$,type=Blaze,DPFire,DPmo=5] summon SmallFireball ~1 ~1 ~ {direction:[0.15d,0d,0d],power:[0.1d,0d,0d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	@e[$SF$,type=Blaze,DPFire,DPmo=5] summon SmallFireball ~-1 ~1 ~ {direction:[-0.15d,0d,0d],power:[-0.1d,0d,0d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	@e[$SF$,type=Blaze,DPFire,DPmo=5] summon SmallFireball ~ ~1 ~1 {direction:[0d,0d,0.15d],power:[0d,0d,0.1d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	@e[$SF$,type=Blaze,DPFire,DPmo=5] summon SmallFireball ~ ~1 ~-1 {direction:[0d,0d,-0.15d],power:[0d,0d,-0.1d],Tags:["DPMob","DPBlazeTurretFireball"]}
+	
+	@e[$SF$,type=Blaze,DPFire] ~ ~ ~ effect @a[DPpl>=1,dy=1] 7 1 0 true
+	@e[$SF$,type=Blaze,DPFire,DPmo=5] DPmo = 0
+	@e[$SF$,type=Blaze,DPFire,DPmo>=1] fill Fire things
+	
+	@e[$SM$,type=Blaze,DPFire,DPmo2>=0<=71] DPmo2 + 1
+	@e[$SM$,type=Blaze,DPFire,DPmo2>=72] DPmo2 = 1
+	
+	LOOP 1 36 + 1 () 5 360 + 10.0 () 185 540 + 10.0
+		//say Tick |0| Angle |2| OppAngle |4| YAngle |6|
+		@e[$SM$,type=Blaze,DPFire,DPmo2=|0|] 'particle flame ~ ~0.1 ~ 'MUL(SIN(|2|);$mod$)' 0 'MUL(COS(|2|);$mod$)' 0.1 0 force'
+		@e[$SM$,type=Blaze,DPFire,DPmo2=|0|] 'particle flame ~ ~0.1 ~ 'MUL(SIN(|4|);$mod$)' 0 'MUL(COS(|4|);$mod$)' 0.1 0 force'
+	END
+END
+//>
+
+
+
+//<Zombie Respawn Clock
+FUNC Func_ZombieRespawnClock
+	testfor @a[DPpl=9]
+	SetblockTestfor
+	
+	$s$clear @a[$SA$,m=2,DPpl=9]
+	effect @a[$SA$,m=2,DPpl=9] clear
+	effect @a[$SA$,m=2,DPpl=9,team=!DPp] 6 1 100 true
+	$s$xp -2147483648L @a[$SA$,m=2,DPpl=9]
+	scoreboard teams join DPp @a[$SA$,m=2,DPpl=9,team=!DPp]
+	replaceitem entity @a[$SA$,m=2,DPpl=9] slot.weapon wooden_sword 1 0 {Unbreakable:1}
+	replaceitem entity @a[$SA$,m=2,DPpl=9] slot.armor.head skull 1 2
+	replaceitem entity @a[$SA$,m=2,DPpl=9] slot.armor.chest leather_chestplate 1 0 {Unbreakable:1,display:{color:38807}}
+	replaceitem entity @a[$SA$,m=2,DPpl=9] slot.armor.legs leather_leggings 1 0 {Unbreakable:1,display:{color:5589194}}
+	replaceitem entity @a[$SA$,m=2,DPpl=9] slot.armor.feet leather_boots 1 0 {Unbreakable:1,display:{color:2500134}}
+	replaceitem entity @a[$SA$,m=2,DPpl=9] slot.weapon.offhand rotten_flesh 64 0 {display:{Name:"Beef Jerky"}}
+	replaceitem entity @a[$SA$,m=2,DPpl=9] slot.inventory.0 rotten_flesh 64 0 {display:{Name:"Extra Beef Jerky"}}
+	$s$tp @a[$SA$,m=2,DPpl=9] //(Side)
+	@a[DPpl=9] DPpl = 10
+END
+//>
+
+
+//<Groups
+:CBPSpawnMob4 PULSE $Style$
+Func_SpawnMob4
+
+:CBPSpawnMob8 PULSE $Style$
+Func_SpawnMob8
+
+:CBPSpawnMob12 PULSE $Style$
+Func_SpawnMob12
+
+:CBPSpawnMob16 PULSE $Style$
+Func_SpawnMob16
+
+:CBPSpawnMob20 PULSE $Style$
+Func_SpawnMob20
+
+:CBPSpawnMob24 PULSE $Style$
+Func_SpawnMob24
+
+
+:CBPMobClock_Resurrection CLOCK $Style$
+Func_MobClock_Resurrection
+
+:CBPMobClock_Jade CLOCK $Style$
+Func_MobClock_Jade
+
+:CBPMobClock_SmellySavvy CLOCK $Style$
+Func_MobClock_SmellySavvy
+
+:CBPMobClock_Chicken CLOCK $Style$
+Func_MobClock_Chicken
+
+:CBPMobClock_Fire CLOCK $Style$
+Func_MobClock_Fire
+
+:CBPMobClock_BlazeTurret CLOCK $Style$
+Func_MobClock_BlazeTurret
+
+
+:CBPSummonMobClock CLOCK $Style$
+Func_SummonMobClock
+
+:CBPEqupimentClock CLOCK $Style$
+Func_EqupimentClock
+
+:CBPZombieRespawnClock CLOCK $Style$
+Func_ZombieRespawnClock
+
+
+:CBPCountdownStart PULSE $Style$
+Deactivate(CBPCountdownStart)
+Func_CountdownStart
+
+:CBPCountdownClock CLOCK $Style$
+Func_CountdownClock
+
+:CBPKillAllMobs PULSE $Style$
+Deactivate(CBPKillAllMobs)
+Func_KillAllMobs
+
+
+:CBPMainStart PULSE $Style$
+Deactivate(CBPMainStart)
+Activate(CBPMainClock)
+Activate(CBPCountdownClock)
+Activate(CBPZombieRespawnClock)
+Activate(CBPMobClock_Resurrection)
+Activate(CBPMobClock_Jade)
+Activate(CBPMobClock_Chicken)
+Activate(CBPMobClock_Fire)
+Activate(CBPMobClock_BlazeTurret)
+Func_GeneralScoreboardStart
+Func_DisplayStart
+
+:CBPMainClock CLOCK $Style$
+Func_GeneralScoreboardClock
+Func_DisplayClock
+
+:CBPMainEnd PULSE $Style$
+Deactivate(CBPMainEnd)
+Deactivate(CBPMainClock)
+Deactivate(CBPSummonMobClock)
+Deactivate(CBPCountdownClock)
+Deactivate(CBPZombieRespawnClock)
+Deactivate(CBPMobClock_Resurrection)
+Deactivate(CBPMobClock_Jade)
+Deactivate(CBPMobClock_Chicken)
+Deactivate(CBPMobClock_Fire)
+Deactivate(CBPMobClock_BlazeTurret)
+Func_GeneralScoreboardEnd
+Func_DisplayEnd
+//>
+
+
+
+
+
+
+
+
+
+
+
+///	give @p minecraft:potion 1 0 {CustomPotionEffects:[{Id:7,Amplifier:0,Duration:1},{Id:10,Amplifier:1,Duration:500}],display:{Name:"wat"},Unbreakable:1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

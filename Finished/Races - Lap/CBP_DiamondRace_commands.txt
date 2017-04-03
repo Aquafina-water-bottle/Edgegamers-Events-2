@@ -1,0 +1,82 @@
+fill 215 17 -21 219 24 -10 air
+kill @e[type=!Player,x=215,y=17,z=-21,dx=4,dy=7,dz=11]
+fill 215 17 -21 219 24 -10 air
+kill @e[type=!Player,x=215,y=17,z=-21,dx=4,dy=7,dz=11]
+setblock 216 18 -20 stonebrick 0
+setblock 218 18 -20 stonebrick 0
+setblock 218 21 -20 stonebrick 0
+setblock 216 22 -20 stonebrick 0
+setblock 216 18 -19 command_block 3 replace {Command:"fill ~0 ~0 ~-1 ~0 ~0 ~-1 stonebrick",TrackOutput:0b,auto:0b}
+setblock 216 18 -18 chain_command_block 3 replace {Command:"scoreboard objectives add DiamondRace dummy Diamond Race",TrackOutput:0b,auto:1b}
+setblock 216 18 -17 chain_command_block 3 replace {Command:"scoreboard objectives add DiamondRaceCD dummy Diamond Race Countdown",TrackOutput:0b,auto:1b}
+setblock 216 18 -16 chain_command_block 3 replace {Command:"scoreboard objectives setdisplay sidebar DiamondRace",TrackOutput:0b,auto:1b}
+setblock 216 18 -15 chain_command_block 3 replace {Command:"scoreboard teams add DiamondR",TrackOutput:0b,auto:1b}
+setblock 216 18 -14 chain_command_block 3 replace {Command:"scoreboard teams option DiamondR color aqua",TrackOutput:0b,auto:1b}
+setblock 216 18 -13 chain_command_block 3 replace {Command:"scoreboard teams option DiamondR seeFriendlyInvisibles true",TrackOutput:0b,auto:1b}
+setblock 216 18 -12 chain_command_block 3 replace {Command:"scoreboard teams option DiamondR collisionRule never",TrackOutput:0b,auto:1b}
+setblock 216 18 -11 chain_command_block 1 replace {Command:"scoreboard teams option DiamondR friendlyfire false",TrackOutput:0b,auto:1b}
+setblock 216 19 -11 chain_command_block 2 replace {Command:"scoreboard objectives add RS dummy Race Status",TrackOutput:0b,auto:1b}
+setblock 216 19 -12 chain_command_block 2 replace {Command:"scoreboard teams add RSg Race Status Green",TrackOutput:0b,auto:1b}
+setblock 216 19 -13 chain_command_block 2 replace {Command:"scoreboard teams add RSr Race Status Red",TrackOutput:0b,auto:1b}
+setblock 216 19 -14 chain_command_block 2 replace {Command:"scoreboard teams option RSg color green",TrackOutput:0b,auto:1b}
+setblock 216 19 -15 chain_command_block 2 replace {Command:"scoreboard teams option RSr color red",TrackOutput:0b,auto:1b}
+setblock 216 19 -16 chain_command_block 2 replace {Command:"scoreboard teams join RSg DiamondR_Closed",TrackOutput:0b,auto:1b}
+setblock 216 19 -17 chain_command_block 2 replace {Command:"scoreboard teams join RSr DiamondR_Open",TrackOutput:0b,auto:1b}
+setblock 216 19 -18 chain_command_block 2 replace {Command:"scoreboard players set DiamondR_Open RS 11",TrackOutput:0b,auto:1b}
+setblock 216 19 -19 chain_command_block 2 replace {Command:"scoreboard players reset DiamondR_Closed RS",TrackOutput:0b,auto:1b}
+setblock 216 19 -20 chain_command_block 1 replace {Command:"summon AreaEffectCloud ~ ~ ~ {Duration:130,Tags:[\\\"DiamondRaceCD\\\"]}",TrackOutput:0b,auto:1b}
+setblock 216 20 -20 chain_command_block 3 replace {Command:"effect @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] clear",TrackOutput:0b,auto:1b}
+setblock 216 20 -19 chain_command_block 3 replace {Command:"scoreboard players set /warp_dr DiamondRace 99",TrackOutput:0b,auto:1b}
+setblock 216 20 -18 chain_command_block 3 replace {Command:"scoreboard teams join DiamondR /warp_dr",TrackOutput:0b,auto:1b}
+setblock 216 20 -17 chain_command_block 3 replace {Command:"fill ~2 ~-2 ~-3 ~2 ~-2 ~-3 redstone_block",TrackOutput:0b,auto:1b}
+setblock 216 20 -16 chain_command_block 3 replace {Command:"fill ~2 ~1 ~-4 ~2 ~1 ~-4 redstone_block",TrackOutput:0b,auto:1b}
+setblock 218 18 -19 repeating_command_block 3 replace {Command:"minecraft:weather clear 1000000",TrackOutput:0b,auto:0b}
+setblock 218 18 -18 chain_command_block 3 replace {Command:"minecraft:gamemode 2 @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=0]",TrackOutput:0b,auto:1b}
+setblock 218 18 -17 chain_command_block 3 replace {Command:"minecraft:clear @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2]",TrackOutput:0b,auto:1b}
+setblock 218 18 -16 chain_command_block 3 replace {Command:"scoreboard players add @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,team=!DiamondR] SPid 0",TrackOutput:0b,auto:1b}
+setblock 218 18 -15 chain_command_block 3 replace {Command:"scoreboard players set @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,team=!DiamondR,score_SPid=-6] SPid 5",TrackOutput:0b,auto:1b}
+setblock 218 18 -14 chain_command_block 3 replace {Command:"scoreboard players set @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,team=!DiamondR,score_SPid_min=-4] SPid 5",TrackOutput:0b,auto:1b}
+setblock 218 18 -13 chain_command_block 3 replace {Command:"scoreboard teams join DiamondR @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,team=!DiamondR]",TrackOutput:0b,auto:1b}
+setblock 218 18 -12 chain_command_block 3 replace {Command:"effect @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2,team=DiamondR] 14 3 0 true",TrackOutput:0b,auto:1b}
+setblock 218 18 -11 chain_command_block 1 replace {Command:"effect @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2,team=DiamondR] 23 3 0 true",TrackOutput:0b,auto:1b}
+setblock 218 19 -11 chain_command_block 2 replace {Command:"scoreboard players add @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2,team=DiamondR] DiamondRace 0",TrackOutput:0b,auto:1b}
+setblock 218 19 -12 chain_command_block 2 replace {Command:"scoreboard players tag @a[x=214,y=16,z=-38,dx=16,dy=5,dz=3,m=2,team=DiamondR,score_DiamondRace_min=0,tag=!DiamondLap] add DiamondLap",TrackOutput:0b,auto:1b}
+setblock 218 19 -13 chain_command_block 2 replace {Command:"scoreboard players add @a[x=224,y=18,z=-42,dx=6,dy=10,dz=1,m=2,team=DiamondR,score_DiamondRace_min=0,tag=!DiamondLap] DiamondRace 1",TrackOutput:0b,auto:1b}
+setblock 218 19 -14 chain_command_block 2 replace {Command:"execute @a[x=224,y=18,z=-42,dx=6,dy=10,dz=1,m=2,team=DiamondR,score_DiamondRace_min=1,tag=!DiamondLap] ~ ~ ~ tellraw @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] {\\\"text\\\":\\\"\\\",\\\"extra\\\":[{\\\"text\\\":\\\"[\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\"DR\\\",\\\"color\\\":\\\"aqua\\\",\\\"bold\\\":\\\"true\\\",\\\"hoverEvent\\\":{\\\"action\\\":\\\"show_text\\\",\\\"value\\\":{\\\"text\\\":\\\"Diamond Race\\\",\\\"color\\\":\\\"aqua\\\"}}},{\\\"text\\\":\\\"]\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\": \\\"},{\\\"selector\\\":\\\"@a[c=1,r=0,m=2,team=DiamondR,score_DiamondRace_min=1,tag=!DiamondLap]\\\"},{\\\"text\\\":\\\" has finished a lap!\\\",\\\"color\\\":\\\"yellow\\\"}]}",TrackOutput:0b,auto:1b}
+setblock 218 19 -15 chain_command_block 2 replace {Command:"execute @a[x=224,y=18,z=-42,dx=6,dy=10,dz=1,m=2,team=DiamondR,score_DiamondRace_min=1,tag=!DiamondLap] ~ ~ ~ playsound minecraft:entity.experience_orb.touch voice @a",TrackOutput:0b,auto:1b}
+setblock 218 19 -16 chain_command_block 2 replace {Command:"scoreboard players tag @a[x=224,y=18,z=-42,dx=6,dy=10,dz=1,m=2,team=DiamondR,score_DiamondRace_min=0,tag=!DiamondLap] add DiamondLap",TrackOutput:0b,auto:1b}
+setblock 218 19 -17 chain_command_block 2 replace {Command:"scoreboard players tag @a[x=249,y=4,z=-28,dx=1,dy=15,dz=6,m=2,team=DiamondR,score_DiamondRace_min=0,tag=DiamondLap] remove DiamondLap",TrackOutput:0b,auto:1b}
+setblock 218 21 -19 repeating_command_block 3 replace {Command:"scoreboard players add @e[type=AreaEffectCloud,tag=DiamondRaceCD] DiamondRaceCD 1",TrackOutput:0b,auto:0b}
+setblock 218 21 -18 chain_command_block 3 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=20,score_DiamondRaceCD=20] ~ ~ ~ tellraw @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] {\\\"text\\\":\\\"\\\",\\\"extra\\\":[{\\\"text\\\":\\\"[\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\"DR\\\",\\\"color\\\":\\\"aqua\\\",\\\"bold\\\":\\\"true\\\",\\\"hoverEvent\\\":{\\\"action\\\":\\\"show_text\\\",\\\"value\\\":{\\\"text\\\":\\\"Diamond Race\\\",\\\"color\\\":\\\"aqua\\\"}}},{\\\"text\\\":\\\"]\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\": \\\"},{\\\"text\\\":\\\"5\\\",\\\"color\\\":\\\"yellow\\\",\\\"bold\\\":\\\"true\\\"}]}",TrackOutput:0b,auto:1b}
+setblock 218 21 -17 chain_command_block 3 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=20,score_DiamondRaceCD=20] ~ ~ ~ execute @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 0.5",TrackOutput:0b,auto:1b}
+setblock 218 21 -16 chain_command_block 3 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=40,score_DiamondRaceCD=40] ~ ~ ~ tellraw @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] {\\\"text\\\":\\\"\\\",\\\"extra\\\":[{\\\"text\\\":\\\"[\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\"DR\\\",\\\"color\\\":\\\"aqua\\\",\\\"bold\\\":\\\"true\\\",\\\"hoverEvent\\\":{\\\"action\\\":\\\"show_text\\\",\\\"value\\\":{\\\"text\\\":\\\"Diamond Race\\\",\\\"color\\\":\\\"aqua\\\"}}},{\\\"text\\\":\\\"]\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\": \\\"},{\\\"text\\\":\\\"4\\\",\\\"color\\\":\\\"yellow\\\",\\\"bold\\\":\\\"true\\\"}]}",TrackOutput:0b,auto:1b}
+setblock 218 21 -15 chain_command_block 3 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=40,score_DiamondRaceCD=40] ~ ~ ~ execute @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 1",TrackOutput:0b,auto:1b}
+setblock 218 21 -14 chain_command_block 3 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=60,score_DiamondRaceCD=60] ~ ~ ~ tellraw @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] {\\\"text\\\":\\\"\\\",\\\"extra\\\":[{\\\"text\\\":\\\"[\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\"DR\\\",\\\"color\\\":\\\"aqua\\\",\\\"bold\\\":\\\"true\\\",\\\"hoverEvent\\\":{\\\"action\\\":\\\"show_text\\\",\\\"value\\\":{\\\"text\\\":\\\"Diamond Race\\\",\\\"color\\\":\\\"aqua\\\"}}},{\\\"text\\\":\\\"]\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\": \\\"},{\\\"text\\\":\\\"3\\\",\\\"color\\\":\\\"yellow\\\",\\\"bold\\\":\\\"true\\\"}]}",TrackOutput:0b,auto:1b}
+setblock 218 21 -13 chain_command_block 3 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=60,score_DiamondRaceCD=60] ~ ~ ~ execute @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 1.5",TrackOutput:0b,auto:1b}
+setblock 218 21 -12 chain_command_block 3 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=80,score_DiamondRaceCD=80] ~ ~ ~ tellraw @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] {\\\"text\\\":\\\"\\\",\\\"extra\\\":[{\\\"text\\\":\\\"[\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\"DR\\\",\\\"color\\\":\\\"aqua\\\",\\\"bold\\\":\\\"true\\\",\\\"hoverEvent\\\":{\\\"action\\\":\\\"show_text\\\",\\\"value\\\":{\\\"text\\\":\\\"Diamond Race\\\",\\\"color\\\":\\\"aqua\\\"}}},{\\\"text\\\":\\\"]\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\": \\\"},{\\\"text\\\":\\\"2\\\",\\\"color\\\":\\\"yellow\\\",\\\"bold\\\":\\\"true\\\"}]}",TrackOutput:0b,auto:1b}
+setblock 218 21 -11 chain_command_block 1 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=80,score_DiamondRaceCD=80] ~ ~ ~ execute @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 2",TrackOutput:0b,auto:1b}
+setblock 218 22 -11 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=100,score_DiamondRaceCD=100] ~ ~ ~ tellraw @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] {\\\"text\\\":\\\"\\\",\\\"extra\\\":[{\\\"text\\\":\\\"[\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\"DR\\\",\\\"color\\\":\\\"aqua\\\",\\\"bold\\\":\\\"true\\\",\\\"hoverEvent\\\":{\\\"action\\\":\\\"show_text\\\",\\\"value\\\":{\\\"text\\\":\\\"Diamond Race\\\",\\\"color\\\":\\\"aqua\\\"}}},{\\\"text\\\":\\\"]\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\": \\\"},{\\\"text\\\":\\\"1\\\",\\\"color\\\":\\\"yellow\\\",\\\"bold\\\":\\\"true\\\"}]}",TrackOutput:0b,auto:1b}
+setblock 218 22 -12 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=100,score_DiamondRaceCD=100] ~ ~ ~ execute @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 2",TrackOutput:0b,auto:1b}
+setblock 218 22 -13 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=120,score_DiamondRaceCD=120] ~ ~ ~ execute @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] ~ ~ ~ playsound minecraft:entity.wither.death voice @a[c=1]",TrackOutput:0b,auto:1b}
+setblock 218 22 -14 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=120,score_DiamondRaceCD=120] ~ ~ ~ tellraw @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] {\\\"text\\\":\\\"\\\",\\\"extra\\\":[{\\\"text\\\":\\\"[\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\"DR\\\",\\\"color\\\":\\\"aqua\\\",\\\"bold\\\":\\\"true\\\",\\\"hoverEvent\\\":{\\\"action\\\":\\\"show_text\\\",\\\"value\\\":{\\\"text\\\":\\\"Diamond Race\\\",\\\"color\\\":\\\"aqua\\\"}}},{\\\"text\\\":\\\"]\\\",\\\"color\\\":\\\"gray\\\"},{\\\"text\\\":\\\": \\\"},{\\\"text\\\":\\\"GO!\\\",\\\"color\\\":\\\"green\\\",\\\"bold\\\":\\\"true\\\"}]}",TrackOutput:0b,auto:1b}
+setblock 218 22 -15 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=120,score_DiamondRaceCD=120] ~ ~ ~ title @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39] title {\\\"text\\\":\\\"GO!\\\",\\\"color\\\":\\\"green\\\"}",TrackOutput:0b,auto:1b}
+setblock 218 22 -16 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=120,score_DiamondRaceCD=120] ~ ~ ~ fill 224 16 -34 230 16 -40 stonebrick 0 replace redstone_block 0",TrackOutput:0b,auto:1b}
+setblock 218 22 -17 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=120,score_DiamondRaceCD=120] ~ ~ ~ fill 224 14 -38 230 14 -36 redstone_block 0 replace stonebrick 0",TrackOutput:0b,auto:1b}
+setblock 218 22 -18 chain_command_block 2 replace {Command:"execute @e[type=AreaEffectCloud,tag=DiamondRaceCD,score_DiamondRaceCD_min=120,score_DiamondRaceCD=120] ~ ~ ~ fill 223 17 -38 222 17 -36 stonebrick 3",TrackOutput:0b,auto:1b}
+setblock 216 22 -19 command_block 3 replace {Command:"fill ~0 ~0 ~-1 ~0 ~0 ~-1 stonebrick",TrackOutput:0b,auto:0b}
+setblock 216 22 -18 chain_command_block 3 replace {Command:"scoreboard objectives remove DiamondRace",TrackOutput:0b,auto:1b}
+setblock 216 22 -17 chain_command_block 3 replace {Command:"scoreboard teams remove DiamondR",TrackOutput:0b,auto:1b}
+setblock 216 22 -16 chain_command_block 3 replace {Command:"scoreboard players tag * remove DiamondLap",TrackOutput:0b,auto:1b}
+setblock 216 22 -15 chain_command_block 3 replace {Command:"scoreboard players set DiamondR_Closed RS 11",TrackOutput:0b,auto:1b}
+setblock 216 22 -14 chain_command_block 3 replace {Command:"scoreboard players reset DiamondR_Open RS",TrackOutput:0b,auto:1b}
+setblock 216 22 -13 chain_command_block 3 replace {Command:"minecraft:kill @e[type=AreaEffectCloud,tag=DiamondRaceCD]",TrackOutput:0b,auto:1b}
+setblock 216 22 -12 chain_command_block 3 replace {Command:"effect @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2] clear",TrackOutput:0b,auto:1b}
+setblock 216 22 -11 chain_command_block 1 replace {Command:"minecraft:clear @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2]",TrackOutput:0b,auto:1b}
+setblock 216 23 -11 chain_command_block 2 replace {Command:"effect @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2] 6 20 100 true",TrackOutput:0b,auto:1b}
+setblock 216 23 -12 chain_command_block 2 replace {Command:"minecraft:tp @a[x=206,y=4,z=-57,dx=49,dy=100,dz=39,m=2] 218 18 -37 -90 0",TrackOutput:0b,auto:1b}
+setblock 216 23 -13 chain_command_block 2 replace {Command:"fill ~2 ~-5 ~-7 ~2 ~-5 ~-7 stonebrick",TrackOutput:0b,auto:1b}
+setblock 216 23 -14 chain_command_block 2 replace {Command:"fill ~2 ~-2 ~-6 ~2 ~-2 ~-6 stonebrick",TrackOutput:0b,auto:1b}
+setblock 216 23 -15 chain_command_block 2 replace {Command:"fill 224 16 -34 230 16 -40 redstone_block 0 replace stonebrick 0",TrackOutput:0b,auto:1b}
+setblock 216 23 -16 chain_command_block 2 replace {Command:"fill 224 14 -38 230 14 -36 stonebrick 0 replace redstone_block 0",TrackOutput:0b,auto:1b}
+setblock 216 23 -17 chain_command_block 2 replace {Command:"fill 223 17 -36 223 17 -38 air 0",TrackOutput:0b,auto:1b}
+setblock 216 23 -18 chain_command_block 2 replace {Command:"fill 222 17 -36 222 17 -38 stone_slab 5",TrackOutput:0b,auto:1b}

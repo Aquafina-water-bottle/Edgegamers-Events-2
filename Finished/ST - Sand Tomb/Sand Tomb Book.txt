@@ -1,0 +1,141 @@
+minecraft:give @p[score_EC=0,score_EC_min=0,r=7] written_book 1 0 
+	{pages:[0:
+		"[\"\",
+			{\"text\":\"Ant Farm Settings\",\"bold\":true},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Arena: \",\"color\":\"black\"},
+			{\"text\":\"Start\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -215 5 32 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"black\"},
+			{\"text\":\"Stop\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -215 9 32 redstone_block 0\"}},
+			
+			{\"text\":\"Doors: \",\"color\":\"dark_gray\"},
+			{\"text\":\"Open\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -219 11 32 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"Closed\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -215 13 32 redstone_block 0\"}},
+			
+			{\"text\":\"Jump boost: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set JumpBoostAF STSave 1\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set JumpBoostAF STSave 0\"}},
+			
+			{\"text\":\"Blindness: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set BlindnessAF STSave 1\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set BlindnessAF STSave 0\"}},
+			
+			{\"text\":\"No Sprint: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set NoSprintAF STSave 1\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set NoSprintAF STSave 0\"}},
+			
+			{\"text\":\"Potion: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set PotionsAF STSave 2\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set PotionsAF STSave 0\"}},
+			
+			{\"text\":\"Collisions: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set CollisionsAF STSave 2\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set CollisionsAF STSave 0\"}},
+			
+			{\"text\":\"Teleport: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/minecraft:tp @a[r=0,c=1] -249 5 37.0\"}},
+			
+			{\"text\":\"Reset Settings: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -211 7 32 redstone_block 0\"}},
+			
+			{\"text\":\"Ant Farm Delay\",\"color\":\"black\",\"bold\":true},
+			{\"text\":\"\n[1]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 1\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[2]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 2\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[3]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 3\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[4]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 4\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[5]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 5\"}},
+			{\"text\":\"\n\"},
+			{\"text\":\"[6]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 6\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[7]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 7\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[8]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 8\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[9]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 9\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[10]\n\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayAF STSave 10\"}}
+		]"
+	],
+title:ST: Ant Farm,author:french_man}
+		
+minecraft:give @p[score_EC=0,score_EC_min=0,r=7] written_book 1 0 
+	{pages:[0:
+		"[\"\",
+			{\"text\":\"Classic Settings\",\"bold\":true},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Arena: \",\"color\":\"black\"},
+			{\"text\":\"Start\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -213 5 32 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"black\"},
+			{\"text\":\"Stop\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -213 9 32 redstone_block 0\"}},
+			
+			{\"text\":\"Doors: \",\"color\":\"dark_gray\"},
+			{\"text\":\"Open\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -217 11 32 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"gray\"},
+			{\"text\":\"Closed\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -213 13 32 redstone_block 0\"}},
+			
+			{\"text\":\"Jump boost: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set JumpBoostCL STSave 1\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set JumpBoostCL STSave 0\"}},
+			
+			{\"text\":\"Blindness: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set BlindnessCL STSave 1\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set BlindnessCL STSave 0\"}},
+			
+			{\"text\":\"No Sprint: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set NoSprintCL STSave 1\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set NoSprintCL STSave 0\"}},
+			
+			{\"text\":\"Potion: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set PotionsCL STSave 2\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set PotionsCL STSave 0\"}},
+			
+			{\"text\":\"Collisions: \",\"color\":\"dark_gray\"},
+			{\"text\":\"On\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set CollisionsCL STSave 2\"}},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"Off\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set CollisionsCL STSave 0\"}},
+			
+			{\"text\":\"Teleport: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/minecraft:tp @a[r=0,c=1] -216 4 18\"}},
+			
+			{\"text\":\"Reset Settings: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -211 11 32 redstone_block 0\"}},
+			
+			{\"text\":\"Classic Delay\",\"color\":\"black\",\"bold\":true},
+			{\"text\":\"\n[1]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 1\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[2]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 2\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[3]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 3\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[4]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 4\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[5]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 5\"}},
+			{\"text\":\"\n\"},
+			{\"text\":\"[6]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 6\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[7]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 7\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[8]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 8\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[9]\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 9\"}},
+			{\"text\":\"  \"},
+			{\"text\":\"[10]\n\n\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set DelayCL STSave 10\"}}
+		]"
+	],
+title:ST: Classic,author:french_man}

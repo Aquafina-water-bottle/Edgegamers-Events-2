@@ -1,0 +1,713 @@
+//#-p stonebrick 0 -print
+//1119 40 -1633
+
+//<Defines
+DEFINE $Style$ 16 16 0
+DEFINE $s$ minecraft:
+DEFINE $ObjA$ scoreboard objectives add
+DEFINE $ObjR$ scoreboard objectives remove
+
+///Selecting all
+DEFINE $SA$ x=1095,y=4,z=-1655,dx=68,dy=50,dz=70
+
+///Selecting arena types
+DEFINE $SA1$ x=1096,y=5,z=-1642,dx=22,dy=30,dz=56
+DEFINE $SA2$ x=1141,y=5,z=-1634,dx=21,dy=30,dz=35
+DEFINE $SA3$ x=1119,y=5,z=-1606,dx=20,dy=30,dz=20
+
+///Selecting snowballs in arena (exclude walls and bottom layer, and only include the breakable layers
+DEFINE $SIA1$ x=1098,y=21,z=-1640,dx=17,dy=5,dz=52
+DEFINE $SIA2$ x=1143,y=15,z=-1632,dx=17,dy=11,dz=31
+DEFINE $SIA3$ x=1121,y=7,z=-1640,dx=16,dy=19,dz=16
+
+///Door coords
+DEFINE $D1$ 1124 29 -1618 1124 29 -1616
+DEFINE $D2$ 1134 29 -1618 1134 29 -1616
+DEFINE $D3$ 1128 29 -1614 1130 29 -1614
+
+
+///Select at door entrance
+DEFINE $SD1$ x=1124,y=28,z=-1618,dy=2,dz=2
+DEFINE $SD2$ x=1134,y=28,z=-1618,dy=2,dz=2
+DEFINE $SD3$ x=1128,y=28,z=-1614,dx=2,dy=2
+
+
+///Select at floor
+DEFINE $SF$ x=1095,y=4,z=-1655,dx=68,dy=3,dz=70
+
+///Select at lobby / spawn area
+DEFINE $SP$ x=1119,y=23,z=-1640,dx=20,dy=16,dz=32
+
+///Select below first layer
+DEFINE $SBA1$ x=1096,y=5,z=-1642,dx=22,dy=18,dz=56
+DEFINE $SBA2$ x=1141,y=5,z=-1634,dx=21,dy=18,dz=35
+DEFINE $SBA3$ x=1119,y=5,z=-1606,dx=20,dy=18,dz=20
+
+///Teleport to middle of the arena
+DEFINE $TA1$ 1107.0 24 -1617
+DEFINE $TA2$ 1152.0 24 -1616
+DEFINE $TA3$ 1129 24 -1596
+
+///Teleport to spawn
+DEFINE $TS$ 1129 32 -1630 0 0
+
+
+///Structure blocks
+DEFINE $SBS1$ 1168 6 -1663 1168 5 -1663
+DEFINE $SBS2$ 1187 13 -1642 1187 5 -1642
+DEFINE $SBS3$ 1206 21 -1627 1206 5 -1627
+DEFINE $SBL1$ 1093 24 -1640 1093 23 -1640
+DEFINE $SBL2$ 1143 23 -1637 1143 15 -1637
+DEFINE $SBL3$ 1121 23 -1583 1121 7 -1583 
+
+
+DEFINE $PickaxeItemN$ diamond_pickaxe 1 0 {Unbreakable:1}
+DEFINE $ShovelItemN$ diamond_shovel 1 0 {Unbreakable:1}
+DEFINE $AxeItemN$ diamond_axe 1 0 {Unbreakable:1}
+DEFINE $ShearsItemN$ shears 1 0 {Unbreakable:1}
+
+DEFINE $PickaxeItemE$ diamond_pickaxe 1 0 {Unbreakable:1,ench:[{id:32,lvl:9001}]}
+DEFINE $ShovelItemE$ diamond_shovel 1 0 {Unbreakable:1,ench:[{id:32,lvl:9001}]}
+DEFINE $AxeItemE$ diamond_axe 1 0 {Unbreakable:1,ench:[{id:32,lvl:9001}]}
+DEFINE $ShearsItemE$ shears 1 0 {Unbreakable:1,ench:[{id:32,lvl:9001}]}
+
+DEFINE $PotionItem$ potion 1 0 {Potion:"minecraft:strong_swiftness"}
+DEFINE SnowballItem snowball |0| |1| {display:{Name:"To do list: Rename this to something better"}}
+
+DEFINE $DeathMessages$ 7
+
+DEFINE $BookCoords$ 1141 40 -1631
+
+DEFINE $SnowballCloud$ @e[type=AreaEffectCloud,BreakawaySnowballCloudIA] summon AreaEffectCloud ~|0| ~|1| ~|2| {Tags:["BreakawaySnowballDestroy","BreakawaySnowballCloud"],Duration:3}
+///
+
+DEFINE Deactivate fill |0| stonebrick 0
+DEFINE Activate fill |0| redstone_block 0
+DEFINE SetblockTestfor setblock ~ ~ ~ repeating_command_block 13 replace {TrackOutput:0b,auto:1b}
+//>
+
+
+//<Open doors
+FUNC Func_OpenDoors
+	scoreboard objectives add BWid dummy Breakaway In Doors
+	scoreboard objectives add BWaf dummy Breakaway Affected Items
+	scoreboard players test Arena BWSave 1 1
+	CONSTART
+		title @a[$SA$] title {"text":"Arena 1 is open","color":"green"}
+		fill $D1$ air 0
+	CONEND
+	
+	scoreboard players test Arena BWSave 2 2
+	CONSTART
+		title @a[$SA$] title {"text":"Arena 2 is open","color":"green"}
+		fill $D2$ air 0
+	CONEND
+	
+	scoreboard players test Arena BWSave 3 3
+	CONSTART
+		title @a[$SA$] title {"text":"Arena 3 is open","color":"green"}
+		fill $D3$ air 0
+	CONEND
+	
+END
+//>
+
+//<Open door clock
+FUNC Func_OpenDoorClock
+	@a[$SD1$] BWid = 1
+	@a[$SD2$] BWid = 1
+	@a[$SD3$] BWid = 1
+	
+	$s$gamemode 2 @a[BWid=1,m=0]
+	@a[$SA$,BWid=1,m=2] BWaf + 0
+	@a[$SA$,BWid=1,m=2,EC=0] stats entity @a[m=2,c=1,r=1,BWid=1,EC=0] set AffectedItems @a[m=2,c=1,r=1,BWid=1,EC=0] BWaf
+	effect @a[$SA$,BWid=1,m=2] clear
+	effect @a[$SA$,BWid=1,m=2] 18 1000000 10 true
+	effect @a[$SA$,BWid=1,m=2] 23 1000000 10 true
+	
+	@a[$SA$,m=2,BWid=1,EC=0] $s$clear @a[m=2,c=1,r=1,BWid=1,EC=0] written_book -1 0
+	$s$clear @a[$SA$,m=2,BWid=1,BWaf=0]
+	@a[BWid=1] BWid = 0
+END
+//>
+
+//<Close all doors
+FUNC Func_CloseDoors
+	scoreboard objectives remove BWid
+	scoreboard objectives remove BWaf
+	fill $D1$ glowstone 0
+	fill $D2$ glowstone 0
+	fill $D3$ glowstone 0
+
+	$s$kill @e[$SA$,type=Item]
+	$s$clear @a[$SA$,m=2]
+	
+	scoreboard players test Hunger BWSave 0 1
+	CONDITION
+		Hunger BWSave = 1
+	scoreboard players test Hunger BWSave 2 3
+	CONSTART
+		Hunger BWSave = 3
+		replaceitem entity @a[$SA$,m=2] slot.weapon.offhand melon 64 0 
+	CONEND
+	scoreboard players test Pickaxe BWSave 0 1
+	CONDITION
+		Pickaxe BWSave = 1
+	scoreboard players test Pickaxe BWSave 2 3
+	CONSTART
+		Pickaxe BWSave = 3
+		$s$give @a[$SA$,m=2] $PickaxeItemN$
+	CONEND
+	scoreboard players test Pickaxe BWSave 4 5
+	CONSTART
+		Pickaxe BWSave = 5
+		$s$give @a[$SA$,m=2] $PickaxeItemE$
+	CONEND
+	
+	scoreboard players test Shovel BWSave 0 1
+	CONDITION
+		Shovel BWSave = 1
+	scoreboard players test Shovel BWSave 2 3
+	CONSTART
+		Shovel BWSave = 3
+		$s$give @a[$SA$,m=2] $ShovelItemN$
+	CONEND
+	scoreboard players test Shovel BWSave 4 5
+	CONSTART
+		Shovel BWSave = 5
+		$s$give @a[$SA$,m=2] $ShovelItemE$
+	CONEND
+	
+	scoreboard players test Axe BWSave 0 1
+	CONDITION
+		Axe BWSave = 1
+	scoreboard players test Axe BWSave 2 3
+	CONSTART
+		Axe BWSave = 3
+		$s$give @a[$SA$,m=2] $AxeItemN$
+	CONEND
+	scoreboard players test Axe BWSave 4 5
+	CONSTART
+		Axe BWSave = 5
+		$s$give @a[$SA$,m=2] $AxeItemE$
+	CONEND
+	
+	scoreboard players test Shears BWSave 0 1
+	CONDITION
+		Shears BWSave = 1
+	scoreboard players test Shears BWSave 2 3
+	CONSTART
+		Shears BWSave = 3
+		$s$give @a[$SA$,m=2] $ShearsItemN$
+	CONEND
+	scoreboard players test Shears BWSave 4 5
+	CONSTART
+		Shears BWSave = 5
+		$s$give @a[$SA$,m=2] $ShearsItemE$
+	CONEND
+	
+	scoreboard players test SpeedPotion BWSave 0 1
+	CONDITION
+		SpeedPotion BWSave = 1
+	scoreboard players test SpeedPotion BWSave 2 3
+	CONSTART
+		SpeedPotion BWSave = 3
+		$s$give @a[$SA$,m=2] $PotionItem$
+	CONEND
+	setblock $BookCoords$ redstone_block 0
+	
+END
+//>
+
+
+//<Start
+FUNC Func_MainStart
+	USE $ObjA$
+		BWSave dummy Breakaway Settings Save
+		BWde deathCount Breakaway Deaths
+		BWpl dummy Breakaway Player List
+		BWdi dummy Breakaway
+		BWaf dummy Breakaway Affected Items
+		BWti dummy Breakaway Timer
+	UNUSE
+	scoreboard objectives setdisplay sidebar BWdi
+	scoreboard teams add BW
+	scoreboard teams option BW color green
+	scoreboard teams option BW collisionRule never
+	scoreboard teams option BW deathMessageVisibility never
+	gamerule keepInventory true
+	gamerule doTileDrops false
+	
+	scoreboard teams join BW @a[$SA1$,m=2] @a[$SA2$,m=2] @a[$SA3$,m=2] @a[$SA1$,m=0] @a[$SA2$,m=0] @a[$SA3$,m=0]
+	effect @a[$SA$,m=2,team=BW] clear
+	gamemode 2 @a[$SA$,m=0,team=BW]
+	
+	summon AreaEffectCloud ~ ~ ~ {Tags:["BWEntity","BWCD"],Duration:101}
+	summon ArmorStand ~ ~ ~ {DisabledSlots:2096896,Marker:1,NoGravity:1,NoBasePlate:1,ShowArms:1,Small:1,Invulnerable:1,PersistenceRequired:1,Invisible:1,Tags:["BWEntity","BWAS"]}
+	
+	@a[$SA$,m=2,team=BW] BWpl + 0
+	@a[$SA$,m=2,team=BW] BWti + 100
+	@a[$SA$,m=2,team=BW] BWaf + 0
+	@a[$SA$,m=2,team=BW] stats entity @a[m=2,c=1,r=1,team=BW] set AffectedItems @a[m=2,c=1,r=1,team=BW] BWaf
+	effect @a[$SA$,m=2,team=BW] 18 5 10 true
+	@e[type=ArmorStand,BWAS] BWde + 0
+	
+	scoreboard players test PVP BWSave 1 1
+	CONDITION
+		scoreboard teams option BW friendlyfire false
+	
+	scoreboard players test PVP BWSave 3 3
+	CONDITION
+		scoreboard teams option BW friendlyfire true
+	
+	
+	scoreboard players test Snowball BWSave 0 1
+	CONSTART
+		Snowball BWSave = 1
+	CONEND
+	
+	scoreboard players test Snowball BWSave 2 3
+	CONSTART
+		Snowball BWSave = 3
+		Activate(CBPSnowballClock)
+	CONEND
+	
+	scoreboard players tag @a[$SBA1$,m=2,BWpl=0] add BreakawayDerp
+	scoreboard players tag @a[$SBA2$,m=2,BWpl=0] add BreakawayDerp
+	scoreboard players tag @a[$SBA3$,m=2,BWpl=0] add BreakawayDerp
+	@a[BreakawayDerp,m=2,BWpl=0] tellraw @a {"text":"","extra":[{"selector":"@a[BreakawayDerp,m=2,BWpl=0,c=1]"},{"text":" is a derp","color":"red"}]}
+	effect @a[BreakawayDerp,m=2,BWpl=0] 6 1 100 true
+	$s$tp @a[$SBA1$,BreakawayDerp,m=2,BWpl=0] $TA1$
+	$s$tp @a[$SBA2$,BreakawayDerp,m=2,BWpl=0] $TA2$
+	$s$tp @a[$SBA3$,BreakawayDerp,m=2,BWpl=0] $TA3$
+	scoreboard players tag @a[BreakawayDerp] remove BreakawayDerp
+	
+	@a[$SA$] playsound minecraft:block.note.pling voice @a[c=1]
+	tellraw @a[$SA$] {"text":"5","color":"yellow","bold":"true"}
+END
+//>
+
+//<Clock
+FUNC Func_MainClock
+	$s$kill @e[$SF$,type=Item]
+	scoreboard players tag @a[$SF$,m=0,BWpl=0] add BWKilled {OnGround:1b}
+	$s$kill @a[$SF$,m=0,BWpl=0,BWKilled]
+	kill @a[$SF$,m=0,BWpl=0,CannotDie=0,BWKilled]
+	
+	@a[BWde>=1,BWpl=0] BWaf = 0
+	@a[BWde>=1,BWpl=0,EC=0] stats entity @a[m=0,c=1,BWde>=1,BWpl=0,EC=0] set AffectedItems @a[m=0,c=1,BWde>=1,BWpl=0,EC=0] BWaf
+	@a[BWde>=1,BWpl=0,EC=0] $s$clear @a[m=0,c=1,BWde>=1,BWpl=0,EC=0] written_book -1 0
+	$s$clear @a[BWde>=1,BWpl=0,BWaf=0]
+	
+	scoreboard players reset @a[BWde>=1,BWpl=0] BWpl
+	scoreboard teams leave @a[BWde>=1,team=BW]
+	
+	gamemode 2 @a[$SP$,m=0]
+	@e[type=ArmorStand,BWAS,BWde>=0] BWde + 1
+	@e[type=ArmorStand,BWAS,BWde=ADD($DeathMessages$;1)] BWde = 1 
+	
+	Players BWpl = 0
+	@a[$SA$,BWpl=0] Players BWpl + 1
+	Players BWdi = Players BWpl
+	
+	scoreboard players test PVP BWSave 0 0
+	CONSTART
+		PVP BWSave = 1
+		scoreboard teams option BW friendlyfire false
+	CONEND
+	scoreboard players test PVP BWSave 2 2
+	CONSTART
+		PVP BWSave = 3
+		scoreboard teams option BW friendlyfire true
+	CONEND
+	
+	scoreboard players test Snowball BWSave 0 0
+	CONSTART
+		Snowball BWSave = 1
+		Deactivate(CBPSnowballClock)
+	CONEND
+	scoreboard players test Snowball BWSave 2 2
+	CONSTART
+		Snowball BWSave = 3
+		Activate(CBPSnowballClock)
+	CONEND
+	
+	scoreboard players test Hunger BWSave 0 0
+	CONSTART
+		Hunger BWSave = 1
+		$s$clear @a[$SA$,m=0,BWpl=0] melon
+	CONEND
+	scoreboard players test Hunger BWSave 1 1
+	CONDITION
+		effect @a[$SA$,m=0,BWpl=0] 23 3 100 true
+	scoreboard players test Hunger BWSave 2 2
+	CONSTART
+		Hunger BWSave = 3
+		replaceitem entity @a[$SA$,m=0,BWpl=0] slot.weapon.offhand melon 64 0 
+	CONEND
+		
+		
+	scoreboard players test Invulnerability BWSave 0 0
+	CONSTART
+		Invulnerability BWSave = 1
+		effect @a[$SA$,m=0,BWpl=0] 11 0 0 true
+	CONEND
+	scoreboard players test Invulnerability BWSave 2 2
+	CONDITION
+		effect @a[$SA$,m=0,BWpl=0] 11 3 10 true
+	
+
+	$s$kill @e[$SA$,type=Item]
+	scoreboard players test Pickaxe BWSave 0 0
+	CONSTART
+		Pickaxe BWSave = 1
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_pickaxe
+	CONEND
+	scoreboard players test Pickaxe BWSave 2 2
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_pickaxe
+		scoreboard players test Pickaxe BWSave 4 4
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_pickaxe
+	scoreboard players test Pickaxe BWSave 2 2
+	CONSTART
+		Pickaxe BWSave = 3
+		$s$give @a[$SA$,m=0,BWpl=0] $PickaxeItemN$
+	CONEND
+	scoreboard players test Pickaxe BWSave 4 4
+	CONSTART
+		Pickaxe BWSave = 5
+		$s$give @a[$SA$,m=0,BWpl=0] $PickaxeItemE$
+	CONEND
+	
+	scoreboard players test Shovel BWSave 0 0
+	CONSTART
+		Shovel BWSave = 1
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_shovel
+	CONEND
+	scoreboard players test Shovel BWSave 2 2
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_shovel
+		scoreboard players test Shovel BWSave 4 4
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_shovel
+	scoreboard players test Shovel BWSave 2 2
+	CONSTART
+		Shovel BWSave = 3
+		$s$give @a[$SA$,m=0,BWpl=0] $ShovelItemN$
+	CONEND
+	scoreboard players test Shovel BWSave 4 4
+	CONSTART
+		Shovel BWSave = 5
+		$s$give @a[$SA$,m=0,BWpl=0] $ShovelItemE$
+	CONEND
+	
+	scoreboard players test Axe BWSave 0 0
+	CONSTART
+		Axe BWSave = 1
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_axe
+	CONEND
+	scoreboard players test Axe BWSave 2 2
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_axe
+		scoreboard players test Axe BWSave 4 4
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] diamond_axe
+	scoreboard players test Axe BWSave 2 2
+	CONSTART
+		Axe BWSave = 3
+		$s$give @a[$SA$,m=0,BWpl=0] $AxeItemN$
+	CONEND
+	scoreboard players test Axe BWSave 4 4
+	CONSTART
+		Axe BWSave = 5
+		$s$give @a[$SA$,m=0,BWpl=0] $AxeItemE$
+	CONEND
+	
+	scoreboard players test Shears BWSave 0 0
+	CONSTART
+		Shears BWSave = 1
+		$s$clear @a[$SA$,m=0,BWpl=0] shears
+	CONEND
+	scoreboard players test Shears BWSave 2 2
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] shears
+		scoreboard players test Shears BWSave 4 4
+	CONDITION
+		$s$clear @a[$SA$,m=0,BWpl=0] shears
+	scoreboard players test Shears BWSave 2 2
+	CONSTART
+		Shears BWSave = 3
+		$s$give @a[$SA$,m=0,BWpl=0] $ShearsItemN$
+	CONEND
+	scoreboard players test Shears BWSave 4 4
+	CONSTART
+		Shears BWSave = 5
+		$s$give @a[$SA$,m=0,BWpl=0] $ShearsItemE$
+	CONEND
+	
+	scoreboard players test SpeedPotion BWSave 0 0
+	CONSTART
+		SpeedPotion BWSave = 1
+		$s$clear @a[$SA$,m=0,BWpl=0] potion
+	CONEND
+	scoreboard players test SpeedPotion BWSave 2 2
+	CONSTART
+		SpeedPotion BWSave = 3
+		$s$give @a[$SA$,m=0,BWpl=0] $PotionItem$
+	CONEND
+END
+//>
+
+//<End
+FUNC Func_MainEnd
+	scoreboard teams remove BW
+	$s$kill @e[BWEntity]
+	scoreboard players tag * remove BWKilled
+	effect @a[$SA$,BWpl=0] clear
+	effect @a[$SA$,BWpl=0] 6 1 100 true
+	effect @a[$SA$,BWpl=0] 11 5 100 true
+	gamerule keepInventory false
+	
+	@a[$SA$,BWpl=0] BWaf = 0
+	@a[$SA$,BWpl=0,EC=0] stats entity @a[c=1,r=1,EC=0,BWpl=0] set AffectedItems @a[c=1,r=1,EC=0,BWpl=0] BWaf
+	@a[$SA$,BWpl=0,EC=0] $s$clear @a[c=1,r=1,EC=0,BWpl=0] written_book -1 0
+	$s$clear @a[$SA$,BWpl=0,BWaf=0]
+	
+	$s$tp @a[$SA$,BWpl=0] $TS$
+	USE $ObjR$
+		BWde
+		BWpl
+		BWdi
+		BWaf
+		BWti
+	UNUSE
+	
+///Arena 1
+	fill 1115 23 -1640 1098 23 -1588 bedrock 0
+///Arena 2
+	fill 1143 23 -1632 1160 23 -1601 bedrock 0
+	fill 1143 19 -1632 1160 19 -1601 bedrock 0
+	fill 1143 15 -1632 1160 15 -1601 bedrock 0
+///Arena 3
+	fill 1137 23 -1604 1121 23 -1588 bedrock 0
+	fill 1137 19 -1604 1121 19 -1588 bedrock 0
+	fill 1137 15 -1604 1121 15 -1588 bedrock 0
+	fill 1137 11 -1604 1121 11 -1588 bedrock 0
+	fill 1137 7 -1604 1121 7 -1588 bedrock 0
+/// baby i'm ballin
+END
+//>
+
+
+//<Countdown
+FUNC Func_Countdown
+	testfor @e[type=AreaEffectCloud,BWCD] {Age:20}
+	CONSTART
+		@a[$SA$] playsound minecraft:block.note.pling voice @a[c=1]
+		tellraw @a[$SA$] {"text":"4","color":"yellow","bold":"true"}
+	CONEND
+	testfor @e[type=AreaEffectCloud,BWCD] {Age:40}
+	CONSTART
+		@a[$SA$] playsound minecraft:block.note.pling voice @a[c=1]
+		tellraw @a[$SA$] {"text":"3","color":"yellow","bold":"true"}
+	CONEND
+	testfor @e[type=AreaEffectCloud,BWCD] {Age:60}
+	CONSTART
+		@a[$SA$] playsound minecraft:block.note.pling voice @a[c=1]
+		tellraw @a[$SA$] {"text":"2","color":"yellow","bold":"true"}
+	CONEND
+	testfor @e[type=AreaEffectCloud,BWCD] {Age:80}
+	CONSTART
+		@a[$SA$] playsound minecraft:block.note.pling voice @a[c=1]
+		tellraw @a[$SA$] {"text":"1","color":"yellow","bold":"true"}
+	CONEND
+	testfor @e[type=AreaEffectCloud,BWCD] {Age:95}
+	CONDITION
+		Activate(CBPCountdownSave)
+	testfor @e[type=AreaEffectCloud,BWCD] {Age:100}
+	CONSTART
+		Activate(CBPCountdownLoad)
+		Deactivate(CBPCountdown)
+	CONEND
+	
+	scoreboard players tag @a[$SBA1$,m=2,BWpl=0] add BreakawayDerp
+	scoreboard players tag @a[$SBA2$,m=2,BWpl=0] add BreakawayDerp
+	scoreboard players tag @a[$SBA3$,m=2,BWpl=0] add BreakawayDerp
+	@a[BreakawayDerp,m=2,BWpl=0] tellraw @a {"text":"","extra":[{"selector":"@a[BreakawayDerp,m=2,BWpl=0,c=1]"},{"text":" is a derp","color":"red"}]}
+	effect @a[BreakawayDerp,m=2,BWpl=0] 6 1 100 true
+	$s$tp @a[$SBA1$,BreakawayDerp,m=2,BWpl=0] $TA1$
+	$s$tp @a[$SBA2$,BreakawayDerp,m=2,BWpl=0] $TA2$
+	$s$tp @a[$SBA3$,BreakawayDerp,m=2,BWpl=0] $TA3$
+	scoreboard players tag @a[BreakawayDerp] remove BreakawayDerp
+END
+//>
+
+//<Breakaway Countdown Save
+FUNC Func_CountdownSave
+	LOOP 1 3 + 1
+		scoreboard players test Arena BWSave |0| |0|
+		CONSTART
+			fill $SBS|0|$ redstone_block 0 replace stonebrick 0
+			fill $SBS|0|$ stonebrick 0 replace redstone_block 0
+		CONEND
+	END
+END
+//>
+
+//<Breakaway Countdown Load
+FUNC Func_CountdownLoad
+	@a[$SA$] playsound minecraft:block.note.pling voice @a[c=1] ~ ~ ~ 2 2
+	tellraw @a[$SA$] {"text":"Begin!","color":"yellow","bold":"true"}
+	gamemode 0 @a[$SA$,m=2,BWpl=0]
+	LOOP 1 3 + 1
+		scoreboard players test Arena BWSave |0| |0|
+		CONSTART
+			fill $SBL|0|$ redstone_block 0 replace stonebrick 0
+			fill $SBL|0|$ stonebrick 0 replace redstone_block 0
+		CONEND
+	END
+END
+//>
+
+//<Custom Death Messages
+FUNC Func_DeathMessages
+	testfor @a[BWKilled]
+	SetblockTestfor
+	@e[type=ArmorStand,BWAS,BWde=1] @a[BWKilled,BWde>=1] tellraw @a {"text":"","extra":[{"selector":"@a[c=1,BWKilled,BWde>=1]"},{"text":" didn't bounce"}]}
+	@e[type=ArmorStand,BWAS,BWde=2] @a[BWKilled,BWde>=1] tellraw @a {"text":"","extra":[{"selector":"@a[c=1,BWKilled,BWde>=1]"},{"text":" spontaneously combusted"}]}
+	@e[type=ArmorStand,BWAS,BWde=2] @a[BWKilled,BWde>=1] particle hugeexplosion ~ ~ ~ 0 0 0 0 1 force
+	@e[type=ArmorStand,BWAS,BWde=2] @a[BWKilled,BWde>=1] playsound minecraft:entity.generic.explode voice @a ~ ~ ~ 1 0.75
+	@e[type=ArmorStand,BWAS,BWde=3] @a[BWKilled,BWde>=1] tellraw @a {"text":"","extra":[{"selector":"@a[c=1,BWKilled,BWde>=1]"},{"text":" faceplanted the ground"}]}
+	@e[type=ArmorStand,BWAS,BWde=4] @a[BWKilled,BWde>=1] tellraw @a {"text":"","extra":[{"selector":"@a[c=1,BWKilled,BWde>=1]"},{"text":" did not have feather falling boots"}]}
+	@e[type=ArmorStand,BWAS,BWde=5] @a[BWKilled,BWde>=1] tellraw @a {"text":"","extra":[{"selector":"@a[c=1,BWKilled,BWde>=1]"},{"text":" couldn't fly"}]}
+	@e[type=ArmorStand,BWAS,BWde=6] @a[BWKilled,BWde>=1] tellraw @a {"text":"","extra":[{"selector":"@a[c=1,BWKilled,BWde>=1]"},{"text":" slipped on a banana"}]}
+	@e[type=ArmorStand,BWAS,BWde=7] @a[BWKilled,BWde>=1] tellraw @a {"text":"","extra":[{"selector":"@a[c=1,BWKilled,BWde>=1]"},{"text":"\'s legs bent the wrong way"}]}
+	scoreboard players tag @a[BWKilled] remove BWKilled
+	@a[BWde>=1] BWde = 0
+END
+//>
+
+//<Snowball Clock
+FUNC Func_SnowballClock
+	@a[$SA$,BWpl=0,m=0] $s$clear @a[BWpl=0,m=0,c=1,r=1] SnowballItem(-1,0)
+	@a[$SA$,BWpl=0,m=0,BWaf=0,BWti>=0<=99] BWti + 1
+	$s$give @a[$SA$,BWpl=0,m=0,BWaf=0,BWti=100] SnowballItem(1,0)
+	@a[$SA$,BWpl=0,m=0,BWaf=0,BWti=100] BWti = 0
+
+///	scoreboard players tag @a[$SA$,BWpl=0] add BreakawayHoldingSnowball {SelectedItem:{id:"snowball",tag:{display:{Lore:"Removes blocks"}}}}
+	///Only removes blocks if they are in the arena. 
+	///If the area of effect cloud is detected to not be in the arena, it will not have a tag and be killed immediately after
+	///
+	scoreboard players tag @e[$SA$,type=Snowball,!BreakawaySnowball] add BreakawaySnowball
+	@e[$SA$,type=Snowball,BreakawaySnowball] $s$kill @e[type=AreaEffectCloud,BreakawaySnowballCloud,c=1,r=5]
+	scoreboard players tag @e[$SIA1$,type=AreaEffectCloud,BreakawaySnowballCloud] add BreakawaySnowballCloudIA
+	scoreboard players tag @e[$SIA2$,type=AreaEffectCloud,BreakawaySnowballCloud] add BreakawaySnowballCloudIA
+	scoreboard players tag @e[$SIA3$,type=AreaEffectCloud,BreakawaySnowballCloud] add BreakawaySnowballCloudIA
+/// do the filling stuff (one square, 3 rectangles)
+///	Square will be 0.4 in each corner while 0.6 on each side
+	@e[type=AreaEffectCloud,BreakawaySnowballCloudIA] say ye
+	
+	$SnowballCloud$(0.4;0.4;0.4)
+	$SnowballCloud$(0.4;0.4;-0.4)
+	$SnowballCloud$(0.4;-0.4;0.4)
+	$SnowballCloud$(0.4;-0.4;-0.4)
+	$SnowballCloud$(-0.4;0.4;0.4)
+	$SnowballCloud$(-0.4;0.4;-0.4)
+	$SnowballCloud$(-0.4;-0.4;0.4)
+	$SnowballCloud$(-0.4;-0.4;-0.4)
+	
+	$SnowballCloud$(0.6;;)
+	$SnowballCloud$(-0.6;;)
+	$SnowballCloud$(;0.6;)
+	$SnowballCloud$(;-0.6;)
+	$SnowballCloud$(;;0.6)
+	$SnowballCloud$(;;-0.6)
+	
+///	@e[type=AreaEffectCloud,BreakawaySnowballCloudIA] summon AreaEffectCloud ~ ~ ~ {Tags:["BreakawaySnowballDestroy","BreakawaySnowballCloud"],Duration:3}
+///	@e[type=AreaEffectCloud,BreakawaySnowballCloudIA] fill 
+///	@e[type=AreaEffectCloud,BreakawaySnowballCloudIA] fill 
+///	@e[type=AreaEffectCloud,BreakawaySnowballCloudIA] fill 
+	@e[type=AreaEffectCloud,BreakawaySnowballCloudIA] playsound minecraft:entity.item.pickup voice @a[c=1]
+	
+	$s$kill @e[type=AreaEffectCloud,BreakawaySnowballCloud]
+	
+	
+	@e[$SA$,type=Snowball,BreakawaySnowball] summon AreaEffectCloud ~ ~ ~ {Duration:3,Tags:["BreakawaySnowballCloud"]}
+	
+	
+///	scoreboard players tag @a[BreakawayHoldingSnowball] remove BreakawayHoldingSnowball
+END
+//>
+
+
+//<Groups
+:CBPOpenDoors PULSE $Style$
+Deactivate(CBPOpenDoors)
+Func_OpenDoors
+Activate(CBPOpenDoorClock)
+
+
+:CBPOpenDoorClock CLOCK $Style$
+Func_OpenDoorClock
+
+
+:CBPCloseDoors PULSE $Style$
+Deactivate(CBPCloseDoors)
+Func_CloseDoors
+Deactivate(CBPOpenDoorClock)
+
+
+
+:CBPMainStart PULSE $Style$
+Deactivate(CBPMainStart)
+Func_MainStart
+Activate(CBPCountdown)
+Activate(CBPMainClock)
+Activate(CBPDeathMessages)
+
+
+
+:CBPCountdown CLOCK $Style$
+Func_Countdown
+
+:CBPCountdownSave PULSE $Style$
+Deactivate(CBPCountdownSave)
+Func_CountdownSave
+
+:CBPCountdownLoad PULSE $Style$
+Deactivate(CBPCountdownLoad)
+Func_CountdownLoad
+
+
+
+:CBPMainClock CLOCK $Style$
+Func_MainClock
+
+
+:CBPSnowballClock CLOCK $Style$
+Func_SnowballClock
+
+:CBPDeathMessages CLOCK $Style$
+Func_DeathMessages
+
+
+
+:CBPMainEnd PULSE $Style$
+Func_MainEnd
+Deactivate(CBPMainEnd)
+Deactivate(CBPCountdown)
+Deactivate(CBPMainClock)
+Deactivate(CBPDeathMessages)
+//>
+
+
+
+
+
+
+
+
+
+
+

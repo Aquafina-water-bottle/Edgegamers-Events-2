@@ -1,0 +1,267 @@
+fill 15 4 -17 32 12 -11 air
+kill @e[type=!Player,x=15,y=4,z=-17,dx=17,dy=8,dz=6]
+fill 15 4 -17 32 12 -11 air
+kill @e[type=!Player,x=15,y=4,z=-17,dx=17,dy=8,dz=6]
+setblock 16 5 -16 stonebrick 0
+setblock 16 5 -14 stonebrick 0
+setblock 16 5 -12 stonebrick 0
+setblock 16 7 -12 stonebrick 0
+setblock 16 9 -12 stonebrick 0
+setblock 16 11 -12 stonebrick 0
+setblock 25 9 -12 stonebrick 0
+setblock 24 11 -12 stonebrick 0
+setblock 17 5 -16 command_block 5 replace {Command:"fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 18 5 -16 chain_command_block 5 replace {Command:"summon ArmorStand 16 16 0 {Tags:[\"CCStand\"],Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1}",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 5 -16 chain_command_block 5 replace {Command:"scoreboard players set @e[tag=CCStand] CHti 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 5 -16 chain_command_block 5 replace {Command:"scoreboard players operation @e[tag=CCStand] CHid = @p CHid",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 5 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 5 -16 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=0,score_CHid=299] ~ ~ ~ setblock 16 11 0 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 5 -16 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=300,score_CHid=599] ~ ~ ~ setblock 16 11 4 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 5 -16 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=600,score_CHid=899] ~ ~ ~ setblock 16 11 8 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 5 -16 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=900,score_CHid=1199] ~ ~ ~ setblock 16 11 12 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 5 -16 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=1200,score_CHid=1400] ~ ~ ~ setblock 16 11 16 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 5 -16 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=1500,score_CHid=1799] ~ ~ ~ setblock 16 11 20 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 5 -16 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=1800,score_CHid=2099] ~ ~ ~ setblock 16 11 24 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 5 -16 chain_command_block 5 replace {Command:"fill 16 11 0 16 11 24 stonebrick 0 replace redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 5 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 5 -16 chain_command_block 1 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 6 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 6 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 6 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 6 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 6 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 6 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 6 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 6 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 6 -16 chain_command_block 1 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 7 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 7 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 7 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 7 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 7 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 7 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 7 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 7 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 7 -16 chain_command_block 1 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 8 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 8 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 8 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 8 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 8 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 8 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 8 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 8 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 8 -16 chain_command_block 1 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 9 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 9 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 9 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 9 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 9 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 9 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 9 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 9 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 9 -16 chain_command_block 1 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 10 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 10 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 10 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 10 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 10 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 10 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 10 -16 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 10 -16 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 10 -16 chain_command_block 1 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 11 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 11 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 11 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 11 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 11 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 11 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 11 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 11 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 11 -16 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 11 -16 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 11 -16 chain_command_block 5 replace {Command:"fill ~-10 ~-4 ~4 ~-10 ~-4 ~4 redstone_block",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 5 -14 command_block 5 replace {Command:"fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 18 5 -14 chain_command_block 5 replace {Command:"summon ArmorStand 16 16 0 {Tags:[\"CCStand\"],Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1}",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 5 -14 chain_command_block 5 replace {Command:"scoreboard players set @e[tag=CCStand] CHti -1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 5 -14 chain_command_block 5 replace {Command:"scoreboard players operation @e[tag=CCStand] CHid = @p CHid",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 5 -14 chain_command_block 5 replace {Command:"scoreboard players operation @e[tag=CCStand] CHis = @p CHid",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 5 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 5 -14 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=0,score_CHid=299] ~ ~ ~ setblock 16 11 0 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 5 -14 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=300,score_CHid=599] ~ ~ ~ setblock 16 11 4 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 5 -14 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=600,score_CHid=899] ~ ~ ~ setblock 16 11 8 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 5 -14 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=900,score_CHid=1199] ~ ~ ~ setblock 16 11 12 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 5 -14 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=1200,score_CHid=1400] ~ ~ ~ setblock 16 11 16 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 5 -14 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=1500,score_CHid=1799] ~ ~ ~ setblock 16 11 20 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 5 -14 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHid_min=1800,score_CHid=2099] ~ ~ ~ setblock 16 11 24 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 5 -14 chain_command_block 5 replace {Command:"fill 16 11 0 16 11 24 stonebrick 0 replace redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 5 -14 chain_command_block 1 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 6 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 6 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 6 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 6 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 6 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 6 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 6 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 6 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 6 -14 chain_command_block 1 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 7 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 7 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 7 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 7 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 7 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 7 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 7 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 7 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 7 -14 chain_command_block 1 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 8 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 8 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 8 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 8 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 8 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 8 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 8 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 8 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 8 -14 chain_command_block 1 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 9 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 9 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 9 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 9 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 9 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 9 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 9 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 9 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 9 -14 chain_command_block 1 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 10 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 10 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 10 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 10 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 10 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 10 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 10 -14 chain_command_block 4 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 10 -14 chain_command_block 4 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 10 -14 chain_command_block 1 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 16 11 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 11 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 18 11 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 11 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 11 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 11 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 11 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 11 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 11 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 11 -14 chain_command_block 5 replace {Command:"minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 11 -14 chain_command_block 5 replace {Command:"scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 11 -14 chain_command_block 5 replace {Command:"fill ~-11 ~-4 ~2 ~-11 ~-4 ~2 redstone_block",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 5 -12 command_block 5 replace {Command:"fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 18 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHti=0] ~ ~ ~ clone 18 4 -6 18 4 -5 ~ ~ ~",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 5 -12 chain_command_block 5 replace {Command:"fill 18 4 -6 18 4 -5 air 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHis_min=0,score_CHis=299] ~ ~ ~ setblock 16 14 0 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHis_min=300,score_CHis=599] ~ ~ ~ setblock 16 14 4 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHis_min=600,score_CHis=899] ~ ~ ~ setblock 16 14 8 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHis_min=900,score_CHis=1199] ~ ~ ~ setblock 16 14 12 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHis_min=1200,score_CHis=1400] ~ ~ ~ setblock 16 14 16 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHis_min=1500,score_CHis=1799] ~ ~ ~ setblock 16 14 20 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 5 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHis_min=1800,score_CHis=2099] ~ ~ ~ setblock 16 14 24 redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 5 -12 chain_command_block 5 replace {Command:"fill 16 14 0 16 14 24 stonebrick 0 replace redstone_block 0",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 7 -12 repeating_command_block 5 replace {Command:"scoreboard players add @e[type=ArmorStand,tag=CCStand,score_CHti_min=1] CHti 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 18 7 -12 chain_command_block 5 replace {Command:"scoreboard players remove @e[type=ArmorStand,tag=CCStand,score_CHti=-1] CHti 1",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 7 -12 chain_command_block 5 replace {Command:"testfor @e[type=ArmorStand,tag=CCStand,score_CHti_min=5,score_CHti=5]",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 7 -12 chain_command_block 13 replace {Command:"fill ~-4 ~2 ~0 ~-4 ~2 ~0 redstone_block",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 7 -12 chain_command_block 5 replace {Command:"testfor @e[type=ArmorStand,tag=CCStand,score_CHti_min=-5,score_CHti=-5]",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 7 -12 chain_command_block 13 replace {Command:"fill ~-6 ~-2 ~0 ~-6 ~-2 ~0 redstone_block",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 7 -12 chain_command_block 5 replace {Command:"testfor @e[type=ArmorStand,tag=CCStand,score_CHti_min=-10,score_CHti=-10]",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 24 7 -12 chain_command_block 13 replace {Command:"fill ~1 ~2 ~0 ~1 ~2 ~0 redstone_block",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 9 -12 command_block 5 replace {Command:"fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 18 9 -12 chain_command_block 5 replace {Command:"execute @e[tag=CCStand,score_CHti_min=0] ~ ~ ~ clone ~ ~ ~ ~ ~ ~1 18 4 -6",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 9 -12 chain_command_block 5 replace {Command:"fill 16 16 0 25 45 25 stone 2 replace chest",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 9 -12 chain_command_block 5 replace {Command:"fill 16 16 0 25 45 25 stone 4 replace trapped_chest",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 9 -12 chain_command_block 5 replace {Command:"scoreboard players reset @e[tag=CCStand]",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 9 -12 chain_command_block 5 replace {Command:"minecraft:kill @e[tag=CCStand]",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 23 9 -12 chain_command_block 5 replace {Command:"fill ~-7 ~-2 ~0 ~-7 ~-2 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 17 11 -12 command_block 5 replace {Command:"fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 18 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives add Number dummy",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 19 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives add CHid dummy Chest ID",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 20 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives add CHis dummy Chest ID Save",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 21 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives add CHst dummy Chest State",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 22 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives add CHti dummy Chest Timer",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 26 9 -12 command_block 5 replace {Command:"fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 27 9 -12 chain_command_block 5 replace {Command:"fill 16 16 0 25 45 25 stone 2 replace chest",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 9 -12 chain_command_block 5 replace {Command:"fill 16 16 0 25 45 25 stone 4 replace trapped_chest",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 29 9 -12 chain_command_block 5 replace {Command:"scoreboard players reset @e[tag=CCStand]",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 30 9 -12 chain_command_block 5 replace {Command:"minecraft:kill @e[tag=CCStand]",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 31 9 -12 chain_command_block 5 replace {Command:"fill ~-15 ~-2 ~0 ~-15 ~-2 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 25 11 -12 command_block 5 replace {Command:"fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:0b}
+setblock 26 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives remove CHid",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 27 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives remove CHclc",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}
+setblock 28 11 -12 chain_command_block 5 replace {Command:"scoreboard objectives remove CHti",TrackOutput:0b,CustomName:"CBP",LastOutput:"{\"text\":\"Made with CBP\"}",auto:1b}

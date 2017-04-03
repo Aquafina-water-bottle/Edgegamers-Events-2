@@ -1,0 +1,92 @@
+:CBPMainStart PULSE 0 10 10		[0 0 0 | 3 5 12]
+	fill ~0 ~0 ~-1 ~0 ~0 ~-1 stonebrick
+	scoreboard objectives add EvilRace dummy Evil Race
+	scoreboard objectives add EvilRaceCD dummy Evil Race Countdown
+	scoreboard objectives add EvilRaceBC dummy Evil Race Broadcast
+	scoreboard objectives setdisplay sidebar EvilRace
+	scoreboard teams add EvilR
+	scoreboard teams option EvilR color gray
+	scoreboard teams option EvilR seeFriendlyInvisibles true
+	scoreboard teams option EvilR collisionRule never
+	scoreboard teams option EvilR friendlyfire false
+	scoreboard objectives add RS dummy Race Status
+	scoreboard teams add RSg Race Status Green
+	scoreboard teams add RSr Race Status Red
+	scoreboard teams option RSg color green
+	scoreboard teams option RSr color red
+	scoreboard teams join RSg EvilR_Closed
+	scoreboard teams join RSr EvilR_Open
+	scoreboard players set EvilR_Open RS 6
+	scoreboard players reset EvilR_Closed RS
+	summon AreaEffectCloud ~ ~ ~ {Duration:130,Tags:["EvilRaceCD"]}
+	effect @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] clear
+	scoreboard players set /warp_evilr EvilRace 0
+	scoreboard teams join EvilR /warp_evilr
+	fill ~2 ~-2 ~-4 ~2 ~-2 ~-4 redstone_block
+	fill ~4 ~-2 ~-5 ~4 ~-2 ~-5 redstone_block
+
+:CBPMainClock CLOCK 0 10 10		[2 0 0 | 3 5 12]
+	minecraft:weather clear 1000000
+	minecraft:gamemode 2 @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=0]
+	minecraft:clear @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2]
+	scoreboard players add @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,team=!EvilR] SPid 0
+	scoreboard players add @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,team=!EvilR] EvilRaceBC 0
+	scoreboard players set @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,team=!EvilR,score_SPid=-5] SPid 4
+	scoreboard players set @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,team=!EvilR,score_SPid_min=-3] SPid 4
+	scoreboard teams join EvilR @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,team=!EvilR]
+	effect @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2,team=EvilR] 14 3 0 true
+	effect @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2,team=EvilR] 23 3 0 true
+	scoreboard players set @a[x=36,y=16,z=-133,dy=1,c=1,m=2,score_EvilRaceBC_min=0,score_EvilRaceBC=0] EvilRaceBC 1
+	execute @a[x=36,y=16,z=-133,dy=1,c=1,m=2,score_EvilRaceBC_min=1,score_EvilRaceBC=1] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"selector":"@a[c=1,m=2]"},{"text":" took first place!","color":"green"}]}
+	execute @a[x=36,y=16,z=-133,dy=1,c=1,m=2,score_EvilRaceBC_min=1,score_EvilRaceBC=1] ~ ~ ~ playsound minecraft:entity.player.levelup voice @a
+	execute @a[x=36,y=16,z=-133,dy=1,c=1,m=2,score_EvilRaceBC_min=1,score_EvilRaceBC=1] ~ ~ ~ fill 36 16 -133 36 16 -133 redstone_block 0
+	scoreboard players set @a[x=36,y=16,z=-130,dy=1,c=1,m=2,score_EvilRaceBC_min=0,score_EvilRaceBC=0] EvilRaceBC 2
+	execute @a[x=36,y=16,z=-130,dy=1,c=1,m=2,score_EvilRaceBC_min=2,score_EvilRaceBC=2] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"selector":"@a[c=1,m=2]"},{"text":" took second place!","color":"green"}]}
+	execute @a[x=36,y=16,z=-130,dy=1,c=1,m=2,score_EvilRaceBC_min=2,score_EvilRaceBC=2] ~ ~ ~ playsound minecraft:entity.player.levelup voice @a
+	execute @a[x=36,y=16,z=-130,dy=1,c=1,m=2,score_EvilRaceBC_min=2,score_EvilRaceBC=2] ~ ~ ~ fill 36 16 -130 36 16 -130 redstone_block 0
+	scoreboard players set @a[x=36,y=16,z=-136,dy=1,c=1,m=2,score_EvilRaceBC_min=0,score_EvilRaceBC=0] EvilRaceBC 3
+	execute @a[x=36,y=16,z=-136,dy=1,c=1,m=2,score_EvilRaceBC_min=3,score_EvilRaceBC=3] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"selector":"@a[c=1,m=2]"},{"text":" took third place!","color":"green"}]}
+	execute @a[x=36,y=16,z=-136,dy=1,c=1,m=2,score_EvilRaceBC_min=3,score_EvilRaceBC=3] ~ ~ ~ playsound minecraft:entity.player.levelup voice @a
+	execute @a[x=36,y=16,z=-136,dy=1,c=1,m=2,score_EvilRaceBC_min=3,score_EvilRaceBC=3] ~ ~ ~ fill 36 16 -136 36 16 -136 redstone_block 0
+	execute @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2,score_EvilRaceBC_min=1] ~ ~ ~ scoreboard players operation @a[r=1,c=1,m=2,score_EvilRaceBC_min=1] EvilRace = @a[r=1,c=1,m=2,score_EvilRaceBC_min=1] EvilRaceBC
+	scoreboard players operation @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2,score_EvilRaceBC_min=1] EvilRace *= -1 Number
+	scoreboard players operation @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2,score_EvilRaceBC_min=1] EvilRaceBC *= -1 Number
+
+:CBPCountdown CLOCK 0 10 10		[4 0 0 | 3 4 12]
+	scoreboard players add @e[type=AreaEffectCloud,tag=EvilRaceCD] EvilRaceCD 1
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=20,score_EvilRaceCD=20] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"5","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=20,score_EvilRaceCD=20] ~ ~ ~ execute @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 0.5
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=40,score_EvilRaceCD=40] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"4","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=40,score_EvilRaceCD=40] ~ ~ ~ execute @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 1
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=60,score_EvilRaceCD=60] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"3","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=60,score_EvilRaceCD=60] ~ ~ ~ execute @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 1.5
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=80,score_EvilRaceCD=80] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"2","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=80,score_EvilRaceCD=80] ~ ~ ~ execute @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=100,score_EvilRaceCD=100] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"1","color":"yellow","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=100,score_EvilRaceCD=100] ~ ~ ~ execute @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] ~ ~ ~ playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=120,score_EvilRaceCD=120] ~ ~ ~ execute @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] ~ ~ ~ playsound minecraft:entity.wither.death voice @a[c=1]
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=120,score_EvilRaceCD=120] ~ ~ ~ tellraw @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] {"text":"","extra":[{"text":"[","color":"gray"},{"text":"EvilR","color":"gray","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"Evil Race","color":"gray"}}},{"text":"]","color":"gray"},{"text":": "},{"text":"GO!","color":"green","bold":"true"}]}
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=120,score_EvilRaceCD=120] ~ ~ ~ title @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27] title {"text":"GO!","color":"green"}
+	execute @e[type=AreaEffectCloud,tag=EvilRaceCD,score_EvilRaceCD_min=120,score_EvilRaceCD=120] ~ ~ ~ fill 31 5 -129 31 5 -137 stonebrick 0 replace redstone_block 0
+
+:CBPMainEnd PULSE 0 10 10		[4 3 0 | 3 4 12]
+	fill ~0 ~0 ~-1 ~0 ~0 ~-1 stonebrick
+	scoreboard objectives remove EvilRace
+	scoreboard objectives remove EvilRaceCD
+	scoreboard objectives remove EvilRaceBC
+	scoreboard teams remove EvilR
+	scoreboard players set EvilR_Closed RS 6
+	scoreboard players reset EvilR_Open RS
+	minecraft:kill @e[type=AreaEffectCloud,tag=EvilRaceCD]
+	fill 36 16 -133 36 16 -133 air 0
+	fill 36 16 -130 36 16 -130 air 0
+	fill 36 16 -136 36 16 -136 air 0
+	effect @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2] clear
+	minecraft:clear @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2]
+	effect @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2] 6 20 100 true
+	minecraft:tp @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2] 23 7 -133 -90 0
+	scoreboard teams join NoPVP @a[x=19,y=6,z=-147,dx=88,dy=100,dz=27,m=2]
+	fill ~-2 ~-4 ~-2 ~-2 ~-4 ~-2 stonebrick
+	fill ~0 ~-4 ~-1 ~0 ~-4 ~-1 stonebrick
+	fill 31 5 -129 31 5 -137 redstone_block 0 replace stonebrick 0
+

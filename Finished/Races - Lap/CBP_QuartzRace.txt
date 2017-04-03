@@ -1,0 +1,105 @@
+//#-p stonebrick 0 -print
+///	223 5 -140
+
+//<Defines
+DEFINE $Style$ 0 10 10
+DEFINE $SA$ x=219,y=4,z=-177,dx=77,dy=100,dz=38
+
+///	Name
+DEFINE $Name$ Quartz
+///	Race Status Number
+DEFINE $RSn$ 13
+///	Warp name
+DEFINE $WN$ qr
+///	Text display name
+DEFINE $TD$ QR
+///	Scoreboard teams color
+DEFINE $Color$ white
+///	Place where air is when open
+DEFINE $Dao$ 240 6 -160 232 6 -154
+///	Place where redstone blocks are there when open
+DEFINE $Dro$ 232 4 -156 240 4 -158
+///	Spawn Coords for teleporting
+DEFINE $SC$ 229 8 -157 -90 0
+///	Spawn Coords ID
+DEFINE $SPid$ 8
+
+///	Where laps are completed
+DEFINE $lap$ x=232,y=7,z=-163,dx=8,dy=5,dz=2
+///	Area where laps are reset inside the races
+DEFINE $lapAF$ x=241,y=8,z=-142,dy=3,dz=2
+///	Area where laps are disabled in spawn
+DEFINE $lapSP$ x=226,y=6,z=-158,dx=14,dy=6,dz=2
+
+IMPORT CBPI_LapRace.txt
+//>
+
+//<Comments
+FUNC Func_RandomComments
+	
+END
+//>
+
+//<To Do 
+FUNC Func_ToDoThings
+TDWorks TDTest TDFix
+Mandatory Unimplemented Changes:
+	-
+	
+General Unimplemented Changes:
+	-
+	
+Bugs:
+	-
+	
+Implemented Changes:
+	-
+	
+Bug fixes:
+	-
+	
+END
+//>
+
+
+//<Groups
+:CBPMainStart PULSE $Style$
+Deactivate(CBPMainStart)
+Func_GeneralScoreboardStart
+Activate(CBPMainClock)
+Activate(CBPCountdown)
+
+:CBPMainClock CLOCK $Style$
+Func_GeneralScoreboardClock
+
+:CBPCountdown CLOCK $Style$
+Func_CountdownClock
+
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=120] fill $Dao$ stonebrick 0 replace redstone_block 0
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=120] fill $Dro$ redstone_block 0 replace stonebrick 0
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=120] fill 231 7 -158 231 7 -156 quartz_block 0
+
+:CBPMainEnd PULSE $Style$
+Deactivate(CBPMainEnd)
+Func_GeneralScoreboardEnd
+Deactivate(CBPMainClock)
+Deactivate(CBPCountdown)
+	
+	fill $Dao$ redstone_block 0 replace stonebrick 0
+	fill $Dro$ stonebrick 0 replace redstone_block 0
+	fill 231 7 -158 231 7 -156 quartz_stairs 1
+//>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

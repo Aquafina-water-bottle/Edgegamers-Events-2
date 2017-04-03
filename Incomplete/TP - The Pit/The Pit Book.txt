@@ -1,0 +1,297 @@
+minecraft:give @a[score_EC=0,score_EC_min=0,tag=TPBook] written_book 1 0 
+	{pages:[0:
+		"[\"\",
+			{\"text\":\"General Settings\",\"bold\":true},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"The Pit: \",\"color\":\"black\"},
+			{\"text\":\"Start\",\"color\":\"dark_green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -90 16 240 redstone_block 0\"}},
+			{\"text\":\" / \",\"color\":\"black\"},
+			{\"text\":\"Stop\n\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -90 20 240 redstone_block 0\"}},
+			
+			{\"text\":\"Arena Size: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[L]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Arena_Size TPSave 1\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Large\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"[S]\n\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Arena_Size TPSave 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Small\",\"color\":\"gold\"}}
+			},
+			
+			{\"text\":\"Arena Type: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[R]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Arena_Type TPSave 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" or \",\"color\":\"gray\"},
+			{\"text\":\"[D]\n\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Arena_Type TPSave 1\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Degrading\",\"color\":\"gold\"}}
+			},
+			
+			{\"text\":\"Arena Update: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\n\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock -90 30 240 redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Update arena settings\",\"color\":\"gold\"}}
+			},
+			
+			{\"text\":\"Jumping: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[1]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Jump TPSave 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Jump boost 2\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Jump TPSave 1\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Regular jumping\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\n\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Jump TPSave 2\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"No jumping\",\"color\":\"red\"}}
+			},
+			
+			{\"text\":\"Sprinting: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[1]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set NoSprint TPSave 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Regular sprinting\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set NoSprint TPSave 1\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Disable sprinting\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\n\n\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set NoSprint TPSave 2\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Blindness\",\"color\":\"red\"}}
+			},
+			
+			
+			{\"text\":\"Movement speed: \n\",\"color\":\"dark_gray\"},
+			
+			{\"text\":\"[0]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Reset\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[1]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 11\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Swiftness level 1\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 12\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Swiftness level 2\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 13\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Swiftness level 3\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[4]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 14\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Swiftness level 4\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[5]\n\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 15\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Swiftness level 5\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\"[0]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Reset\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[1]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 21\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Slowness level 1\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 22\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Slowness level 2\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 23\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Slowness level 3\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[4]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 24\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Slowness level 4\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[5]\n\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Movement TPSave 25\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Slowness level 5\",\"color\":\"red\"}}
+			}
+		]",1:
+		"[\"\",
+			{\"text\":\"Weapon Settings\",\"bold\":true},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Blaze Rod (3 / 5): \n\",\"color\":\"dark_gray\"},
+			{\"text\":\"[1]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 12\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 3, Slowness\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 10\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 3, Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 11\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 3, Swiftness\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\" / \",\"color\":\"gray\"},
+
+			{\"text\":\"[1]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 17\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 5, Slowness\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 15\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 5, Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\n\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 16\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 5, Swiftness\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\"\n\",\"color\":\"gray\"},
+			
+			{\"text\":\"Snowballs (Reg / Inf): \n\",\"color\":\"dark_gray\"},
+			{\"text\":\"[1]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 30\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 31\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Enable Punching\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 32\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Gives a blaze rod\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\" / \",\"color\":\"gray\"},
+
+			{\"text\":\"[1]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 35\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Infinite\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 36\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Infinite, Enable Punching\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\n\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 37\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Infinite, Gives a blaze rod\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\"\n\",\"color\":\"gray\"},
+			
+			{\"text\":\"Bows: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[1]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 20\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 21\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Enable Punching\",\"color\":\"dark_green\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\n\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 22\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Gives a blaze rod\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\"\n\",\"color\":\"gray\"},
+			
+			{\"text\":\"Porkchop: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[1]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 40\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 41\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Fake\",\"color\":\"red\"}}
+			},
+
+			{\"text\":\"\n\",\"color\":\"gray\"},
+			
+			{\"text\":\"Pumpkin Settings: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\n\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock  redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Set pumpkin delay and number given\",\"color\":\"gold\"}}
+			},
+			
+			{\"text\":\"Give Weapons: \",\"color\":\"dark_gray\"},
+			{\"text\":\"[+]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set @a[m=2,score_TPpl_min=1,score_TPpl=1] TPwtg 1\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Gives all\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\" \",\"color\":\"gray\"},
+			
+			{\"text\":\"[+]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/setblock  redstone_block 0\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Gives to a specific player\",\"color\":\"gold\"}}
+			}
+		]",2:
+		"[\"\",
+			{\"text\":\"Other Settings\",\"bold\":true},
+			{\"text\":\"\n\"},
+			
+			{\"text\":\"Teams: \n\",\"color\":\"dark_gray\"},
+			{\"text\":\"[1]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 12\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 3, Slowness\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 10\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 3, Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 11\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 3, Swiftness\",\"color\":\"dark_green\"}}
+			},
+			
+			{\"text\":\" / \",\"color\":\"gray\"},
+
+			{\"text\":\"[1]\",\"color\":\"red\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 17\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 5, Slowness\",\"color\":\"red\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[2]\",\"color\":\"gold\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 15\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 5, Regular\",\"color\":\"gold\"}}
+			},
+			{\"text\":\" \",\"color\":\"gray\"},
+			{\"text\":\"[3]\n\",\"color\":\"dark_green\",
+				\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/scoreboard players set Weapon TPSave 16\"},
+				\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Knockback 5, Swiftness\",\"color\":\"dark_green\"}}
+			}
+		]"
+	],
+title:The Pit 3 Settings,author:french_man}

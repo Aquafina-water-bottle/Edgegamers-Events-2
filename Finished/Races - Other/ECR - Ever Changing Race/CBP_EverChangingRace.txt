@@ -1,0 +1,379 @@
+//#-p stonebrick 0 -print
+///	447 7 -321
+///	C:\Users\Austin\Documents\Austin\powder game code\eGO\Events & Commands\Races - Other\ECR - Ever Changing Race\CBP_EverChangingRace.txt
+
+//<Defines
+DEFINE $s$ minecraft:
+DEFINE $ObjA$ scoreboard objectives add
+DEFINE $ObjR$ scoreboard objectives remove
+DEFINE $TeamA$ scoreboard teams add
+DEFINE $TeamO$ scoreboard teams option
+DEFINE $TeamR$ scoreboard teams remove
+DEFINE $Style$ 0 16 16
+DEFINE $SA$ x=450,y=0,z=-353,dx=124,dy=30,dz=45
+DEFINE $TextStart$ {"text":"","extra":[{"text":"[","color":"gray"},{"text":"ECR","color":"yellow","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"EverChanging Race","color":"yellow"}}},{"text":"]","color":"gray"},{"text":": "},
+
+DEFINE Deactivate fill |0| stonebrick 0
+DEFINE Activate fill |0| redstone_block 0
+DEFINE ColorFillWool fill |0| wool |1|
+DEFINE ColorFillClay fill |0| stained_hardened_clay |1|
+DEFINE ColorFillGlass fill |0| stained_glass |1|
+DEFINE ColorFillWood fill |0| wood |1|
+DEFINE ScTG scoreboard players tag
+DEFINE ScOP scoreboard players operation
+DEFINE ScTE scoreboard players test
+DEFINE ScRS scoreboard players reset
+DEFINE RevST scoreboard players tag @a[|0|] remove |0|
+DEFINE SetblockTestfor setblock ~ ~ ~ repeating_command_block 11 replace {TrackOutput:0b,auto:1b}
+DEFINE NumberAdd |0| Number = |0|
+DEFINE NumberObjAdd Number dummy
+
+DEFINE DEF_SBlock structure_block 0 replace {mode:"LOAD",posZ:2,name:"ECRPlatform1",integrity:|0|}
+
+
+///	Race Status Number
+DEFINE $RSn$ 9
+///	Warp name
+DEFINE $WN$ ecr
+///	Text display name
+DEFINE $TD$ ECR
+///	Scoreboard teams color
+DEFINE $Color$ yellow
+///	Spawn Coords for teleporting
+DEFINE $SC$ 460 3 -331 -90 0
+///	Spawn Coords ID
+DEFINE $SPid$ 20
+
+///	Where laps are completed
+DEFINE $lap$ x=565,y=3,z=-333,dy=3,dz=4
+///	Area where laps are disabled in spawn
+DEFINE $lapSP$ x=454,y=2,z=-334,dx=12,dy=9,dz=6
+
+
+///	Smiley Heads coordinates
+DEFINE $SHead$ 466 4 -329 466 4 -333
+
+///	ECR Armor Stand placement for structure blocks
+DEFINE $ECRStructure1$ 467 3 -335
+DEFINE $ECRStructure2$ 499 3 -335
+DEFINE $ECRStructure3$ 531 3 -335
+
+///	Select Death
+DEFINE $ECRKill$ x=467,y=0,z=-333,dx=95,dy=-5,dz=4
+///	Coordinates of the platform
+DEFINE $ECRPlatform$ 467 2 -329 562 2 -333
+///	Number of custom death messages
+DEFINE $DeathMessages$ 13
+
+///	Percent list
+DEFINE $ECRPercent1$ 5
+DEFINE $ECRPercent2$ 10
+DEFINE $ECRPercent3$ 15
+DEFINE $ECRPercent4$ 20
+DEFINE $ECRPercent5$ 25
+DEFINE $ECRPercent6$ 30
+DEFINE $ECRPercent7$ 35
+DEFINE $ECRPercent8$ 40
+DEFINE $ECRPercent9$ 45
+DEFINE $ECRPercent10$ 50
+DEFINE $ECRPercent11$ 100
+
+///	Portal
+DEFINE $Portal$ x=569,y=3,z=-333,dy=4,dz=4
+//>
+
+//<Comments
+FUNC Func_Comments
+	Delay 1
+	0.5
+	1
+	1.5
+	2
+	2.5
+	3
+	3.5
+	4
+	4.5
+	5
+
+	Delay 2
+	0.5
+	1
+	1.5
+	2
+	2.5
+
+///	Options
+	On/off lever
+	Text on/off lever
+	EVERYONE LINE UP bcast button
+	Delay 1 sign (x2)
+	Delay 2 sign (x2)
+	Percentage sign (x2)
+	Display sign
+
+ECRSave: Delay1, Delay2, Percent
+END
+//>
+
+//<Main Start
+FUNC Func_GeneralScoreboardStart
+///	Scoreboards
+	USE $ObjA$
+		ECRdi dummy Ever Changing Race
+		ECRde2 deathCount Deaths
+		ECRds dummy ECR Delay State
+		ECRti dummy ECR Delay Timer
+		ECRcl dummy ECR Clear
+		ECRCD dummy ECR Countdown
+		
+		ECRSave dummy ECR Settings Save
+	UNUSE
+	scoreboard objectives setdisplay sidebar ECRdi
+	scoreboard objectives setdisplay belowName ECRde2
+
+	scoreboard teams add ECR
+	scoreboard teams option ECR color $Color$
+	scoreboard teams option ECR seeFriendlyInvisibles true
+	scoreboard teams option ECR collisionRule never
+	scoreboard teams option ECR deathMessageVisibility never
+	scoreboard teams option ECR friendlyfire false
+	
+///	Race Status
+	scoreboard objectives add RS dummy Race Status
+	scoreboard teams add RSg Race Status Green
+	scoreboard teams add RSr Race Status Red
+	scoreboard teams option RSg color green
+	scoreboard teams option RSr color red
+	
+	scoreboard teams join RSg EverChangingR_Closed
+	scoreboard teams join RSr EverChangingR_Open
+	EverChangingR_Open RS = $RSn$
+	scoreboard players reset EverChangingR_Closed RS
+	
+///	Countdown start
+	summon AreaEffectCloud ~ ~ ~ {Duration:130,Tags:["ECRCD"]}
+	
+///	Other
+	effect @a[$SA$] clear
+	\/warp_$WN$ ECRdi = 99
+	scoreboard teams join ECR /warp_$WN$
+	
+///	ECR Armor Stands
+	summon ArmorStand ~ ~ ~ {Marker:1,PersistenceRequired:1,Invisible:1,NoGravity:1,Tags:["ECRAS","ECRTimer"]}
+	summon ArmorStand ~ ~ ~ {Marker:1,PersistenceRequired:1,Invisible:1,NoGravity:1,Tags:["ECRAS","ECRDeathMessages"]}
+	LOOP 1 3 + 1
+		summon ArmorStand $ECRStructure|0|$ {Marker:1,PersistenceRequired:1,Invisible:1,NoGravity:1,Tags:["ECRAS","ECRStructure","ECRStructure|0|"]}
+	END
+	@e[type=ArmorStand,ECRDeathMessages] ECRti + 0
+END
+//>
+
+//<Main Clock
+FUNC Func_GeneralScoreboardClock
+///	General
+	$s$weather clear 1000000
+	$s$gamemode 2 @a[$SA$,m=0]
+	@a[$SA$,team=!ECR] SPid + 0
+	@a[$SA$,team=!ECR,SPid<-$SPid$] SPid = $SPid$
+	@a[$SA$,team=!ECR,SPid>-$SPid$] SPid = $SPid$
+	
+	scoreboard teams join ECR @a[$SA$,team=!ECR]
+	effect @a[$SA$,m=2,team=ECR] 14 3 0 true
+	effect @a[$SA$,m=2,team=ECR] 23 3 0 true
+	
+///	Laps
+	@a[$SA$,m=2,team=ECR] ECRdi + 0
+	@a[$lap$,m=2,team=ECR,ECRdi>=0,!ECLap] ECRdi + 1
+	@a[$lap$,m=2,team=ECR,ECRdi>=1,!ECLap] tellraw @a[$SA$] $TextStart${"selector":"@a[c=1,r=0,m=2,team=ECR,ECRdi>=1,!ECLap]"},{"text":" has finished a lap!","color":"yellow"}]}
+	@a[$lap$,m=2,team=ECR,ECRdi>=1,!ECLap] playsound minecraft:entity.player.levelup voice @a
+	ScTG @a[$lap$,m=2,team=ECR,ECRdi>=0,!ECLap] add ECLap
+	ScTG @a[$lapSP$,m=2,team=ECR,ECRdi>=0,ECLap] remove ECLap
+	
+///	Book clear
+	@a[$SA$,m=2,team=ECR] ECRcl + 0
+///	@a[$SA$,m=2,team=ECR] stats entity @a[c=1] set AffectedItems @a[c=1] ECRcl
+///	@a[$SA$,m=2,team=ECR] $s$clear @a[c=1] written_book -1 0 {title:"ECR Custom Set"}
+	@a[$SA$,m=2,team=ECR,EC=0] ECRcl = 1
+	$s$clear @a[$SA$,m=2,team=ECR,ECRcl=0]
+	
+///	Portal
+	ScTG @a[$Portal$,m=2,team=ECR] add ECRKilled
+	
+///	Custom death messages
+	ScTG @a[$ECRKill$,m=2,team=ECR,!ECRKilled] add ECRKilled
+///	$s$kill @a[$ECRKill$,m=2,team=ECR,ECRKilled]
+///	@e[type=ArmorStand,ECRDeathMessages,ECRti>=0<$DeathMessages$] ECRti + 1
+///	@e[type=ArmorStand,ECRDeathMessages,ECRti=$DeathMessages$] ECRti = 0
+	$s$tp @a[$SA$,m=2,team=ECR,ECRKilled] $SC$
+	@a[$SA$,m=2,team=ECR,ECRKilled] playsound minecraft:entity.endermen.teleport voice @a[c=1]
+	@a[$SA$,m=2,team=ECR,ECRKilled] particle happyVillager ~0.1 ~1 ~0.1 0.3 0.5 0.3 1 20 force
+	effect @a[$SA$,m=2,team=ECR,ECRKilled] 8 5 255 true
+	ScTG @a[ECRKilled] remove ECRKilled
+	
+///	Fills stuff
+	@e[type=ArmorStand,ECRTimer,ECRti>=1] ECRti - 1
+	testfor @e[type=ArmorStand,ECRTimer,ECRti=0,ECRds=1]
+	CONSTART
+		ScOP @e[type=ArmorStand,ECRTimer,ECRti=0,ECRds=1] ECRti = Delay2 ECRSave
+		@e[type=ArmorStand,ECRTimer,ECRds=1] ECRds = 2
+		Activate(CBPStructureBlockPulse)
+	CONEND
+	
+	@e[type=ArmorStand,ECRTimer,ECRti=0,ECRds=2] fill $ECRPlatform$ air 0 replace gold_block 0
+	@e[type=ArmorStand,ECRTimer,ECRti=0,ECRds=2] fill $ECRPlatform$ gold_block 0 replace stained_glass 3
+	
+	testfor @e[type=ArmorStand,ECRTimer,ECRti=0,ECRds=2]
+	CONSTART
+		ScOP @e[type=ArmorStand,ECRTimer,ECRti=0,ECRds=2] ECRti = Delay1 ECRSave
+		@e[type=ArmorStand,ECRTimer,ECRds=2] ECRds = 1
+	CONEND
+END
+//>
+	
+	
+//<Death Messages Testfor Clock
+FUNC Func_DeathMessagesTFClock
+	testfor @a[m=2,team=ECR,ECRKilled]
+	SetblockTestfor
+	
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=1] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" experienced Smiley\'s wrath and spontaneously combusted"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=2] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" accidentally dropped their car keys and jumped for it"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=3] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" slipped on a banana"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=4] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" realized they had lost some potential, but gained kinetic energy"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=5] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" thought there was water underneath"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=6] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" ignored the wet floor sign"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=7] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" figured out what happens if you can\'t fly"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=8] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" heard one of MisterBoy\'s puns"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=9] @a[m=2,team=ECR,ECRKilled,name=!Sooperhampster] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" had a fear of heights and looked down"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=9] @a[m=2,team=ECR,ECRKilled,name=Sooperhampster] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" realized he was not so sooper after all"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=10] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" tried to be a gold block, but suddenly remembered they cannot float"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=11] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" was banned from the server"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=12] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" heard a panda roar"}]}
+	@e[type=ArmorStand,ECRDeathMessages,ECRti=13] @a[m=2,team=ECR,ECRKilled] tellraw @a $TextStart${"selector":"@a[c=1,m=2,ECRKilled]"},{"text":" thought they were playing a dropper map"}]}
+	
+	ScTG @a[ECRKilled] remove ECRKilled
+END
+//>
+
+//<Structure Block Pulse
+FUNC Func_StructureBlockPulse
+	ScOP @e[type=ArmorStand,ECRTimer] ECRSave = Percent ECRSave
+	LOOP 1 11 + 1
+		@e[type=ArmorStand,ECRTimer,ECRSave=$ECRPercent|0|$] @e[type=ArmorStand,ECRStructure] setblock ~ ~-1 ~ DEF_SBlock(DIV($ECRPercent|0|$;100.0))
+	END
+	@e[type=ArmorStand,ECRStructure] setblock ~ ~ ~ redstone_block 0
+	@e[type=ArmorStand,ECRStructure] setblock ~ ~ ~ air 0
+	@a[$SA$] playsound minecraft:entity.experience_orb.touch voice @a[c=1] ~ ~ ~ 0.4
+END
+//>
+
+//<Countdown
+FUNC Func_CountdownClock
+	@e[type=AreaEffectCloud,ECRCD] ECRCD + 1
+	
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=20] tellraw @a[$SA$] $TextStart${"text":"5","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=20] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 0.5
+	
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=40] tellraw @a[$SA$] $TextStart${"text":"4","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=40] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 1
+	
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=60] tellraw @a[$SA$] $TextStart${"text":"3","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=60] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 1.5
+	
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=80] tellraw @a[$SA$] $TextStart${"text":"2","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=80] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=100] tellraw @a[$SA$] $TextStart${"text":"1","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=100] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=120] @a[$SA$] playsound minecraft:entity.wither.death voice @a[c=1]
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=120] tellraw @a[$SA$] $TextStart${"text":"GO!","color":"green","bold":"true"}]}
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=120] title @a[$SA$] title {"text":"GO!","color":"green"}
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=120] @e[type=ArmorStand,ECRTimer] ECRds = 1
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=120] @e[type=ArmorStand,ECRTimer] ECRti = 0
+	@e[type=AreaEffectCloud,ECRCD,ECRCD=120] fill $SHead$ air 0
+	testfor @e[type=AreaEffectCloud,ECRCD,ECRCD=120]
+	CONDITION
+		Deactivate(CBPCountdown)
+END
+//>
+
+
+
+//<Main End
+FUNC Func_GeneralScoreboardEnd
+///	Scoreboard
+	USE $ObjR$
+		ECRdi
+		ECRde
+		ECRde2
+		ECRds
+		ECRti
+		ECRcl
+	UNUSE
+	ScTG * remove ECRLap
+	ScTG * remove ECRKilled
+	scoreboard teams remove ECR
+	
+///	Race Status
+	ECR_Closed RS = $RSn$
+	scoreboard players reset ECR_Open RS
+	
+///	Countdown reset
+	$s$kill @e[type=AreaEffectCloud,ECRCD]
+	
+///	General reset
+	effect @a[$SA$,m=2] clear
+	$s$clear @a[$SA$,m=2]
+	effect @a[$SA$,m=2] 6 20 100 true
+	$s$tp @a[$SA$,m=2] $SC$
+	
+///	Other
+	$s$kill @e[type=ArmorStand,tag=ECRAS]
+	fill $SHead$ skull 4 replace {SkullType:3,Owner:{Name:"Smiley0_1",Id:"15f83218-25b3-4936-873e-20fd1aede94c"}}
+	fill $ECRPlatform$ air 0
+END
+//>
+
+
+//<Groups
+:CBPMainStart PULSE $Style$
+Deactivate(CBPMainStart)
+Func_GeneralScoreboardStart
+Activate(CBPMainClock)
+Activate(CBPCountdown)
+/// Activate(CBPDeathMessagesTFClock)
+
+:CBPMainClock CLOCK $Style$
+Func_GeneralScoreboardClock
+
+:CBPCountdown CLOCK $Style$
+Func_CountdownClock
+
+:CBPMainEnd PULSE $Style$
+Deactivate(CBPMainEnd)
+Func_GeneralScoreboardEnd
+Deactivate(CBPMainClock)
+Deactivate(CBPCountdown)
+/// Deactivate(CBPDeathMessagesTFClock)
+
+
+
+:CBPStructureBlockPulse PULSE $Style$
+Deactivate(CBPStructureBlockPulse)
+Func_StructureBlockPulse
+
+/// :CBPDeathMessagesTFClock CLOCK $Style$
+/// Func_DeathMessagesTFClock
+//>
+
+
+
+
+
+
+
+
+
+

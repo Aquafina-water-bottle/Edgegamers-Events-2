@@ -1,0 +1,141 @@
+//<Defines
+DEFINE $s$ minecraft:
+DEFINE $ObjA$ scoreboard objectives add
+DEFINE $ObjR$ scoreboard objectives remove
+DEFINE $TeamA$ scoreboard teams add
+DEFINE $TeamO$ scoreboard teams option
+DEFINE $TeamR$ scoreboard teams remove
+DEFINE $TextStart$ {"text":"","extra":[{"text":"[","color":"gray"},{"text":"PARSE($TD$)","color":"PARSE($Color$)","bold":"true","hoverEvent":{"action":"show_text","value":{"text":"PARSE($Name$) Race","color":"PARSE($Color$)"}}},{"text":"]","color":"gray"},{"text":": "},
+
+DEFINE Deactivate fill |0| stonebrick 0
+DEFINE Activate fill |0| redstone_block 0
+DEFINE ScTG scoreboard players tag
+DEFINE ScOP scoreboard players operation
+DEFINE RevST scoreboard players tag @a[|0|] remove |0|
+DEFINE SetblockTestfor setblock ~ ~ ~ repeating_command_block 11 replace {TrackOutput:0b,auto:1b}
+DEFINE NumberAdd |0| Number = |0|
+DEFINE NumberObjAdd Number dummy
+//>
+
+//<Main Start
+FUNC Func_GeneralScoreboardStart
+///	Scoreboards
+	USE $ObjA$
+		$Name$Race dummy $Name$ Race
+		$Name$RaceCD dummy $Name$ Race Countdown
+	UNUSE
+	scoreboard objectives setdisplay sidebar $Name$Race
+	
+	scoreboard teams add $Name$R
+	scoreboard teams option $Name$R color $Color$
+	scoreboard teams option $Name$R seeFriendlyInvisibles true
+	scoreboard teams option $Name$R collisionRule never
+	scoreboard teams option $Name$R friendlyfire false
+	
+///	Race Status
+	scoreboard objectives add RS dummy Race Status
+	scoreboard teams add RSg Race Status Green
+	scoreboard teams add RSr Race Status Red
+	scoreboard teams option RSg color green
+	scoreboard teams option RSr color red
+	
+	scoreboard teams join RSg $Name$R_Closed
+	scoreboard teams join RSr $Name$R_Open
+	$Name$R_Open RS = $RSn$
+	scoreboard players reset $Name$R_Closed RS
+	
+///	Countdown start
+	summon AreaEffectCloud ~ ~ ~ {Duration:130,Tags:["$Name$RaceCD"]}
+	
+///	Other
+	effect @a[$SA$] clear
+	\/warp_$WN$ $Name$Race = 99
+	scoreboard teams join $Name$R /warp_$WN$
+END
+//>
+
+//<Main Clock
+FUNC Func_GeneralScoreboardClock
+	$s$weather clear 1000000
+	$s$gamemode 2 @a[$SA$,m=0]
+	$s$clear @a[$SA$,m=2]
+	@a[$SA$,team=!$Name$R] SPid + 0
+	@a[$SA$,team=!$Name$R,SPid<-$SPid$] SPid = $SPid$
+	@a[$SA$,team=!$Name$R,SPid>-$SPid$] SPid = $SPid$
+	scoreboard teams join $Name$R @a[$SA$,team=!$Name$R]
+	effect @a[$SA$,m=2,team=$Name$R] 14 3 0 true
+	effect @a[$SA$,m=2,team=$Name$R] 23 3 0 true
+	
+	@a[$SA$,m=2,team=$Name$R] $Name$Race + 0
+	ScTG @a[$lapSP$,m=2,team=$Name$R,$Name$Race>=0,!$Name$Lap] add $Name$Lap
+	@a[$lap$,m=2,team=$Name$R,$Name$Race>=0,!$Name$Lap] $Name$Race + 1
+	@a[$lap$,m=2,team=$Name$R,$Name$Race>=1,!$Name$Lap] tellraw @a[$SA$] $TextStart${"selector":"@a[c=1,r=0,m=2,team=$Name$R,$Name$Race>=1,!$Name$Lap]"},{"text":" has finished a lap!","color":"yellow"}]}
+	@a[$lap$,m=2,team=$Name$R,$Name$Race>=1,!$Name$Lap] playsound minecraft:entity.experience_orb.touch voice @a
+	ScTG @a[$lap$,m=2,team=$Name$R,$Name$Race>=0,!$Name$Lap] add $Name$Lap
+	ScTG @a[$lapAF$,m=2,team=$Name$R,$Name$Race>=0,$Name$Lap] remove $Name$Lap
+END
+//>
+
+//<Countdown
+FUNC Func_CountdownClock
+	@e[type=AreaEffectCloud,$Name$RaceCD] $Name$RaceCD + 1
+	
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=20] tellraw @a[$SA$] $TextStart${"text":"5","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=20] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 0.5
+	
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=40] tellraw @a[$SA$] $TextStart${"text":"4","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=40] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 1
+	
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=60] tellraw @a[$SA$] $TextStart${"text":"3","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=60] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 1.5
+	
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=80] tellraw @a[$SA$] $TextStart${"text":"2","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=80] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=100] tellraw @a[$SA$] $TextStart${"text":"1","color":"yellow","bold":"true"}]}
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=100] @a[$SA$] playsound block.note.pling voice @a[c=1] ~ ~ ~ 2
+	
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=120] @a[$SA$] playsound minecraft:entity.wither.death voice @a[c=1]
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=120] tellraw @a[$SA$] $TextStart${"text":"GO!","color":"green","bold":"true"}]}
+	@e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=120] title @a[$SA$] title {"text":"GO!","color":"green"}
+	testfor @e[type=AreaEffectCloud,$Name$RaceCD,$Name$RaceCD=120]
+	CONDITION
+		Deactivate(CBPCountdown)
+END
+//>
+
+//<Main End
+FUNC Func_GeneralScoreboardEnd
+///	Scoreboard
+	scoreboard objectives remove $Name$Race
+	scoreboard teams remove $Name$R
+	ScTG * remove $Name$Lap
+	
+///	Race Status
+	$Name$R_Closed RS = $RSn$
+	scoreboard players reset $Name$R_Open RS
+	
+///	Countdown reset
+	$s$kill @e[type=AreaEffectCloud,$Name$RaceCD]
+	
+///	General reset
+	effect @a[$SA$,m=2] clear
+	$s$clear @a[$SA$,m=2]
+	effect @a[$SA$,m=2] 6 20 100 true
+	$s$tp @a[$SA$,m=2] $SC$
+END
+//>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

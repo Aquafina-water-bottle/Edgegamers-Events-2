@@ -1,0 +1,271 @@
+:CBPMainStart PULSE 16 16 0		[0 6 4 | 9 3 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	scoreboard objectives add Number dummy
+	scoreboard objectives add CHid dummy Chest ID
+	scoreboard objectives add CHis dummy Chest ID Save
+	scoreboard objectives add CHst dummy Chest State
+	scoreboard objectives add CHti dummy Chest Timer
+
+:CBPGeneralScoreboardClock CLOCK 16 16 0		[0 2 4 | 11 3 3]
+	scoreboard players add @e[type=ArmorStand,tag=CCStand,score_CHti_min=1] CHti 1
+	scoreboard players remove @e[type=ArmorStand,tag=CCStand,score_CHti=-1] CHti 1
+	testfor @e[type=ArmorStand,tag=CCStand,score_CHti_min=5,score_CHti=5]
+	 L fill ~-4 ~2 ~0 ~-4 ~2 ~0 redstone_block
+	testfor @e[type=ArmorStand,tag=CCStand,score_CHti_min=-5,score_CHti=-5]
+	 L fill ~-6 ~-2 ~0 ~-6 ~-2 ~0 redstone_block
+	testfor @e[type=ArmorStand,tag=CCStand,score_CHti_min=-10,score_CHti=-10]
+	 L fill ~1 ~2 ~0 ~1 ~2 ~0 redstone_block
+
+:CBPMainEnd PULSE 16 16 0		[8 6 4 | 7 3 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	scoreboard objectives remove CHid
+	scoreboard objectives remove CHclc
+	scoreboard objectives remove CHti
+
+:CBPChestCalcLoad1 PULSE 16 16 0		[0 0 0 | 18 9 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	summon ArmorStand 16 16 0 {Tags:["CCStand"],Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1}
+	scoreboard players set @e[tag=CCStand] CHti 1
+	scoreboard players operation @e[tag=CCStand] CHid = @p CHid
+	scoreboard players remove @e[tag=CCStand] CHid 1
+	execute @e[tag=CCStand,score_CHid_min=0,score_CHid=299] ~ ~ ~ setblock 16 11 0 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=300,score_CHid=599] ~ ~ ~ setblock 16 11 4 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=600,score_CHid=899] ~ ~ ~ setblock 16 11 8 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=900,score_CHid=1199] ~ ~ ~ setblock 16 11 12 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=1200,score_CHid=1400] ~ ~ ~ setblock 16 11 16 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=1500,score_CHid=1799] ~ ~ ~ setblock 16 11 20 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=1800,score_CHid=2099] ~ ~ ~ setblock 16 11 24 redstone_block 0
+	fill 16 11 0 16 11 24 stonebrick 0 replace redstone_block 0
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	fill ~-10 ~-4 ~4 ~-10 ~-4 ~4 redstone_block
+
+:CBPChestCalcLoad2 PULSE 16 16 0		[0 4 4 | 10 3 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	execute @e[tag=CCStand,score_CHti_min=0] ~ ~ ~ clone ~ ~ ~ ~ ~ ~1 18 4 -6
+	fill 16 16 0 25 45 25 stone 2 replace chest
+	fill 16 16 0 25 45 25 stone 4 replace trapped_chest
+	scoreboard players reset @e[tag=CCStand]
+	minecraft:kill @e[tag=CCStand]
+	fill ~-7 ~-2 ~0 ~-7 ~-2 ~0 stonebrick
+
+:CBPChestCalcSave1 PULSE 16 16 0		[0 0 2 | 18 9 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	summon ArmorStand 16 16 0 {Tags:["CCStand"],Invulnerable:1,PersistenceRequired:1,Invisible:1,Marker:1,NoGravity:1}
+	scoreboard players set @e[tag=CCStand] CHti -1
+	scoreboard players operation @e[tag=CCStand] CHid = @p CHid
+	scoreboard players operation @e[tag=CCStand] CHis = @p CHid
+	scoreboard players remove @e[tag=CCStand] CHid 1
+	execute @e[tag=CCStand,score_CHid_min=0,score_CHid=299] ~ ~ ~ setblock 16 11 0 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=300,score_CHid=599] ~ ~ ~ setblock 16 11 4 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=600,score_CHid=899] ~ ~ ~ setblock 16 11 8 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=900,score_CHid=1199] ~ ~ ~ setblock 16 11 12 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=1200,score_CHid=1400] ~ ~ ~ setblock 16 11 16 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=1500,score_CHid=1799] ~ ~ ~ setblock 16 11 20 redstone_block 0
+	execute @e[tag=CCStand,score_CHid_min=1800,score_CHid=2099] ~ ~ ~ setblock 16 11 24 redstone_block 0
+	fill 16 11 0 16 11 24 stonebrick 0 replace redstone_block 0
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=300] ~ ~ ~4
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=300] CHid 300
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=10] ~ ~1 ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=10] CHid 10
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	minecraft:tp @e[tag=CCStand,score_CHid_min=1] ~1 ~ ~
+	scoreboard players remove @e[tag=CCStand,score_CHid_min=1] CHid 1
+	fill ~-11 ~-4 ~2 ~-11 ~-4 ~2 redstone_block
+
+:CBPChestCalcSave2 PULSE 16 16 0		[0 0 4 | 14 3 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	execute @e[tag=CCStand,score_CHti=0] ~ ~ ~ clone 18 4 -6 18 4 -5 ~ ~ ~
+	fill 18 4 -6 18 4 -5 air 0
+	execute @e[tag=CCStand,score_CHis_min=0,score_CHis=299] ~ ~ ~ setblock 16 14 0 redstone_block 0
+	execute @e[tag=CCStand,score_CHis_min=300,score_CHis=599] ~ ~ ~ setblock 16 14 4 redstone_block 0
+	execute @e[tag=CCStand,score_CHis_min=600,score_CHis=899] ~ ~ ~ setblock 16 14 8 redstone_block 0
+	execute @e[tag=CCStand,score_CHis_min=900,score_CHis=1199] ~ ~ ~ setblock 16 14 12 redstone_block 0
+	execute @e[tag=CCStand,score_CHis_min=1200,score_CHis=1400] ~ ~ ~ setblock 16 14 16 redstone_block 0
+	execute @e[tag=CCStand,score_CHis_min=1500,score_CHis=1799] ~ ~ ~ setblock 16 14 20 redstone_block 0
+	execute @e[tag=CCStand,score_CHis_min=1800,score_CHis=2099] ~ ~ ~ setblock 16 14 24 redstone_block 0
+	fill 16 14 0 16 14 24 stonebrick 0 replace redstone_block 0
+
+:CBPChestCalcSave3 PULSE 16 16 0		[9 4 4 | 9 3 3]
+	fill ~-1 ~0 ~0 ~-1 ~0 ~0 stonebrick
+	fill 16 16 0 25 45 25 stone 2 replace chest
+	fill 16 16 0 25 45 25 stone 4 replace trapped_chest
+	scoreboard players reset @e[tag=CCStand]
+	minecraft:kill @e[tag=CCStand]
+	fill ~-15 ~-2 ~0 ~-15 ~-2 ~0 stonebrick
+
